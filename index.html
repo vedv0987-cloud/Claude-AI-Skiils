@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
     <!-- Settings Modal -->
@@ -81,14 +81,14 @@
 
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
-            <!-- Welcome Screen (shown when no skill selected) -->
+            <!-- Welcome Screen -->
             <div class="welcome-screen" id="welcomeScreen">
                 <div class="welcome-inner">
                     <div class="welcome-icon">
                         <svg viewBox="0 0 64 64" fill="none" width="64" height="64"><circle cx="32" cy="32" r="28" stroke="url(#wg)" stroke-width="3"/><path d="M20 32L28 40L44 24" stroke="url(#wg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="wg" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#7c5cfc"/><stop offset="1" stop-color="#00d4ff"/></linearGradient></defs></svg>
                     </div>
                     <h1>Welcome to AI Skills Hub</h1>
-                    <p>Select a skill from the sidebar to get started. Each skill is powered by Claude AI and designed for your team's creative workflow.</p>
+                    <p>Select a skill from the sidebar to get started. Each skill is powered by Claude AI and designed for your creative workflow.</p>
                     <div class="welcome-features">
                         <div class="welcome-feature">
                             <span class="wf-icon">1</span>
@@ -100,22 +100,22 @@
                         <div class="welcome-feature">
                             <span class="wf-icon">2</span>
                             <div>
-                                <strong>Give a Brief</strong>
-                                <p>Type text or upload an image</p>
+                                <strong>Upload Anything</strong>
+                                <p>Images, PDFs, docs — up to 20 files at once</p>
                             </div>
                         </div>
                         <div class="welcome-feature">
                             <span class="wf-icon">3</span>
                             <div>
                                 <strong>Get Results</strong>
-                                <p>AI generates output instantly</p>
+                                <p>Same Claude quality as claude.com</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Skill Workspace (shown when a skill is selected) -->
+            <!-- Skill Workspace -->
             <div class="skill-workspace hidden" id="skillWorkspace">
                 <!-- Skill Header -->
                 <div class="workspace-header">
@@ -136,32 +136,30 @@
                     </div>
                 </div>
 
-                <!-- Chat / Response Area -->
+                <!-- Chat Area -->
                 <div class="chat-area" id="chatArea">
-                    <div class="chat-messages" id="chatMessages">
-                        <!-- Messages rendered here -->
-                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
                 </div>
 
                 <!-- Input Area -->
                 <div class="input-area">
-                    <!-- Image Preview -->
-                    <div class="image-preview hidden" id="imagePreview">
-                        <img id="previewImg" alt="Upload preview" />
-                        <button class="remove-image" id="removeImage">&times;</button>
+                    <!-- File Previews (multiple) -->
+                    <div class="files-preview hidden" id="filesPreview">
+                        <div class="files-preview-list" id="filesPreviewList"></div>
+                        <button class="clear-all-files" id="clearAllFiles">Clear all</button>
                     </div>
                     <!-- Input Bar -->
                     <div class="input-bar">
-                        <label class="upload-btn" id="uploadBtn" title="Upload image">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                            <input type="file" id="imageInput" accept="image/*" hidden />
+                        <label class="upload-btn" id="uploadBtn" title="Upload files (images, PDFs, docs — up to 20)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+                            <input type="file" id="fileInput" multiple accept="image/*,.pdf,.doc,.docx,.txt,.csv,.xls,.xlsx,.ppt,.pptx,.rtf,.md" hidden />
                         </label>
                         <textarea id="userInput" placeholder="Describe what you need..." rows="1"></textarea>
                         <button class="send-btn" id="sendBtn" title="Send">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
                     </div>
-                    <div class="input-hint">Press Enter to send, Shift+Enter for new line. Supports image uploads for vision-capable skills.</div>
+                    <div class="input-hint">Enter to send, Shift+Enter for new line. Upload up to 20 files: images (auto-compressed), PDFs, docs.</div>
                 </div>
             </div>
         </main>
@@ -170,6 +168,6 @@
     <!-- Toast -->
     <div class="toast" id="toast"><span id="toastMessage"></span></div>
 
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>

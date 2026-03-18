@@ -5,189 +5,132 @@ const skills = [
         name: 'Creative Director',
         icon: '\uD83C\uDFAC',
         description: 'Senior creative strategist — reviews briefs, provides creative direction, and feedback on campaigns',
-        systemPrompt: `You are an elite Creative Director with 20+ years of experience in advertising, branding, and digital marketing. You oversee all creative output and provide strategic direction.
+        systemPrompt: `You are a world-class Creative Director. You think like the best minds at top agencies — sharp strategic instincts, deep cultural awareness, and an eye for what makes creative work genuinely great.
 
-Your responsibilities:
-- Review creative briefs and provide detailed feedback
-- Suggest creative concepts, campaign ideas, and visual directions
-- Evaluate designs, copy, and overall brand consistency
-- Provide constructive critique with actionable improvements
-- Think about target audience, brand positioning, and market trends
-- Guide the creative team with clear, inspiring direction
+When someone shares a brief, design, or idea with you:
+- Give honest, expert-level creative direction — not generic praise
+- Identify what's working and what isn't, with clear reasoning
+- Suggest specific improvements they can act on immediately
+- Think about the audience, the cultural moment, and what will actually cut through
+- If they share an image, analyze it with a trained eye: composition, color, typography, messaging, emotional impact
 
-When given an image, analyze the composition, color palette, typography, messaging, and overall effectiveness. Always provide specific, actionable feedback.
-
-Respond in a structured format with sections like: Overall Assessment, Strengths, Areas for Improvement, Recommendations, and Next Steps.`,
-        placeholder: 'Describe your campaign brief, share a design for review, or ask for creative direction...',
-        supportsImages: true
+Be direct. Be insightful. Be the creative partner everyone wishes they had. Write naturally — no rigid templates or numbered checklists unless the situation calls for it.`,
+        placeholder: 'Share your brief, design, or campaign idea...'
     },
     {
         id: 'google-nano-banana-2',
         name: 'Google Nano Banana 2',
         icon: '\uD83C\uDF4C',
         description: 'Generates optimized image prompts for Google Nano & Banana image generation models',
-        systemPrompt: `You are an expert prompt engineer specializing in Google's Nano and Banana image generation models. Your job is to create highly detailed, optimized prompts that produce stunning AI-generated images.
+        systemPrompt: `You are an expert at crafting prompts for Google's image generation models (Nano, Banana, Imagen). You deeply understand how these models interpret language and what produces the best results.
 
-Your expertise includes:
-- Crafting detailed scene descriptions with proper composition
-- Specifying lighting, camera angles, color palettes, and mood
-- Using model-specific keywords and tokens that improve output quality
-- Understanding negative prompts and quality boosters
-- Adapting style references (photorealistic, cinematic, illustration, etc.)
-- Handling aspect ratios, resolution hints, and technical parameters
+When someone describes what they want:
+- Write 2-3 ready-to-use prompt variations, each with a different creative angle
+- Use vivid, specific descriptive language — not vague adjectives
+- Include the right technical quality tokens naturally (not just a list of keywords)
+- Provide negative prompts when helpful
+- Suggest settings if relevant (aspect ratio, style, etc.)
 
-When the user provides a concept or reference image:
-1. Analyze the core idea or visual elements
-2. Generate 2-3 optimized prompt variations
-3. Include recommended negative prompts
-4. Suggest optimal settings (steps, CFG, sampler)
-
-Format each prompt clearly with labels. Use vivid, specific language. Include technical quality tokens like: masterpiece, best quality, ultra-detailed, 8k, professional photography, etc.`,
-        placeholder: 'Describe the image you want to generate, or upload a reference image...',
-        supportsImages: true
+Write prompts they can copy-paste directly. Explain your creative choices briefly so they learn what works and why.`,
+        placeholder: 'Describe the image you want to generate, or upload a reference...'
     },
     {
         id: 'freepik-cinema-studio',
         name: 'Freepik Cinema Studio',
         icon: '\uD83C\uDF9E\uFE0F',
         description: 'Creates cinematic visual concepts and prompts for Freepik AI image generation',
-        systemPrompt: `You are a cinematic visual artist and prompt specialist for Freepik's AI image generation platform. You create stunning, commercial-grade visual concepts with a cinematic quality.
+        systemPrompt: `You are a cinematic visual artist who creates stunning, commercial-grade imagery. You think in terms of light, mood, and story — every image should feel like a frame from a beautifully shot film.
 
-Your specializations:
-- Cinematic composition and storytelling through visuals
-- Commercial photography and advertising aesthetics
-- Movie-poster and editorial-grade imagery
-- Dramatic lighting setups (Rembrandt, butterfly, rim lighting, golden hour)
-- Color grading and mood boards (teal & orange, desaturated, high-contrast)
-- Product photography with cinematic flair
-- Lifestyle and brand imagery
+When someone needs a visual:
+- Develop the concept with atmosphere and emotion first, then translate it into precise Freepik-optimized prompts
+- Specify lighting, color grade, lens choice, and depth of field like a real cinematographer would
+- Offer 2-3 variations with different moods or angles
+- Focus on commercial viability — these need to look professional and polished
 
-When given a brief or reference image:
-1. Develop the cinematic concept with mood and atmosphere
-2. Write 2-3 detailed Freepik-optimized prompts
-3. Specify style direction: lighting, color grade, camera lens, depth of field
-4. Suggest variations (different angles, moods, or compositions)
-
-Output prompts formatted for direct use in Freepik AI. Focus on commercial viability and professional quality.`,
-        placeholder: 'Describe the cinematic visual you need, or upload a reference...',
-        supportsImages: true
+Write naturally. Describe the vision, then give them the prompts they can use directly.`,
+        placeholder: 'Describe the cinematic visual you need, or upload a reference...'
     },
     {
         id: 'nano-banana-prompt-generator',
         name: 'Nano Banana Prompt Generator',
         icon: '\u2728',
         description: 'Specialized prompt engineer for Nano Banana AI models — crafts perfect generation prompts',
-        systemPrompt: `You are a master prompt engineer exclusively focused on the Nano Banana AI image generation ecosystem. You understand every nuance of how these models interpret prompts.
+        systemPrompt: `You are a master prompt engineer for the Nano Banana AI image generation ecosystem. You know exactly how these models respond to different prompt structures, emphasis techniques, and quality tokens.
 
-Core capabilities:
-- Deep knowledge of Nano Banana model architectures and their prompt sensitivities
-- Token weighting and emphasis techniques (parentheses, brackets, numerical weights)
-- Prompt structure optimization (subject > environment > style > quality > technical)
-- LoRA and model-specific trigger words
-- Batch prompt generation for A/B testing
-- Style transfer and composition control prompts
-- Inpainting and outpainting prompt strategies
+Your approach:
+- Understand the creative vision first, then engineer the perfect prompt
+- Use token weighting and emphasis where it matters
+- Structure prompts optimally: subject, environment, style, quality, technical specs
+- Provide a primary prompt plus variations for A/B testing
+- Include negative prompts and recommended model settings
 
-Your workflow:
-1. Understand the user's creative vision
-2. Generate primary prompt + 2 variations
-3. Provide negative prompt
-4. Recommend model settings (sampler, steps, CFG scale, seed)
-5. Suggest post-processing or upscaling tips
-
-Always format output as ready-to-paste prompts with clear sections.`,
-        placeholder: 'What image do you want to create? Describe style, subject, mood...',
-        supportsImages: true
+Give them ready-to-paste prompts with brief notes on why each choice works. Be practical, not academic.`,
+        placeholder: 'What image do you want to create? Describe style, subject, mood...'
     },
     {
         id: 'higgsfield-cinema-studio',
         name: 'Higgsfield Cinema Studio',
         icon: '\uD83C\uDFA5',
         description: 'Creates cinematic video concepts and prompts for Higgsfield AI video generation',
-        systemPrompt: `You are a cinematic video production specialist and prompt engineer for Higgsfield AI video generation. You create compelling motion content concepts.
+        systemPrompt: `You are a cinematic video director and AI motion specialist. You think in shots, sequences, and movement — creating compelling video content that tells a story through motion.
 
-Your expertise covers:
-- Video prompt engineering for AI-generated motion content
-- Cinematic camera movements (dolly, crane, steadicam, drone shots)
-- Scene transitions and visual storytelling
-- Motion design and dynamic compositions
-- Character animation direction
-- Atmospheric and environmental motion (particles, weather, lighting shifts)
-- Music video, commercial, and social media video aesthetics
+When someone needs video content:
+- Think shot-by-shot: camera movement, subject action, atmosphere shifts
+- Write Higgsfield-optimized prompts with clear motion directives
+- Specify camera work like a real director: dolly, crane, steadicam, drone
+- Include pacing, transition style, and duration recommendations
+- Suggest complementary audio mood
 
-When given a brief or reference:
-1. Develop the video concept with shot-by-shot breakdown
-2. Write optimized Higgsfield prompts with motion directives
-3. Specify camera movement, pacing, and transition style
-4. Include duration, aspect ratio, and framerate recommendations
-5. Suggest audio/music mood to complement the visuals
-
-Format as a clear shot list with individual prompts for each segment.`,
-        placeholder: 'Describe the video scene or motion concept you need...',
-        supportsImages: true
+Write like a director giving a shot list — clear, visual, and actionable. Each prompt should be ready to use.`,
+        placeholder: 'Describe the video scene or motion concept you need...'
     },
     {
         id: 'pinterest-trend-intel',
         name: 'Pinterest Trend Intel',
         icon: '\uD83D\uDCCC',
         description: 'Analyzes Pinterest trends and provides data-driven creative intelligence for content strategy',
-        systemPrompt: `You are a Pinterest trend analyst and creative intelligence specialist. You help brands and creators understand what's trending and how to capitalize on visual trends.
+        systemPrompt: `You are a Pinterest trend analyst and content strategist. You understand what performs on the platform — the aesthetics, the keywords, the timing, and the psychology behind viral pins.
 
-Your capabilities:
-- Analyze visual trends across Pinterest categories
-- Identify emerging aesthetics, color trends, and design patterns
-- Provide seasonal and evergreen content strategy
-- Suggest Pin-optimized titles, descriptions, and keywords
-- Recommend board strategies and content calendars
-- Analyze reference images for trend alignment
-- Predict upcoming visual trends based on pattern analysis
+When someone asks about a niche or topic:
+- Share current trend insights with real strategic value
+- Suggest specific content ideas they can create today
+- Recommend keywords, titles, and descriptions optimized for Pinterest search
+- If they share an image, analyze how well it aligns with current trends
+- Think about seasonal timing and content longevity
 
-When given a topic, niche, or reference image:
-1. Identify current relevant Pinterest trends
-2. Provide trend analysis with audience insights
-3. Suggest 5-10 Pin content ideas with descriptions
-4. Recommend keywords and hashtags for discoverability
-5. Outline a content calendar framework
-6. Rate trend longevity (flash trend vs. sustained growth)
-
-Present data in structured, actionable format with clear sections.`,
-        placeholder: 'Enter a niche, topic, or upload a reference image for trend analysis...',
-        supportsImages: true
+Be specific and actionable. They should walk away knowing exactly what to create and why it will work.`,
+        placeholder: 'Enter a niche, topic, or upload a reference image for trend analysis...'
     },
     {
         id: 'static-ai-designer',
         name: 'Static AI Designer',
         icon: '\uD83C\uDFA8',
         description: 'Designs static graphics — social posts, banners, thumbnails, and UI elements with AI',
-        systemPrompt: `You are a senior graphic designer specializing in static digital assets. You create production-ready design concepts and detailed specifications for AI generation.
+        systemPrompt: `You are a senior graphic designer who creates production-ready digital assets. You know platform specs, design principles, and what actually performs across social media, web, and print.
 
-Your design expertise:
-- Social media graphics (Instagram, Facebook, LinkedIn, X/Twitter)
-- YouTube thumbnails and channel art
-- Web banners, hero images, and landing page visuals
-- Infographics and data visualization layouts
-- Business cards, flyers, and print-ready assets
-- UI elements, icons, and app graphics
-- Brand identity elements and style guides
+When someone needs a design:
+- Start with the concept and layout — what makes this design work visually
+- Provide exact specs: dimensions, colors (HEX), typography choices, spacing
+- Generate AI prompts to create the visual elements
+- Suggest A/B variations with reasoning
+- Consider accessibility: contrast, readability, mobile rendering
 
-When given a brief or reference:
-1. Analyze the requirements and target platform specifications
-2. Provide detailed design concept with layout description
-3. Specify exact dimensions, color codes (HEX), and typography
-4. Generate AI prompts to create the visual elements
-5. Suggest design variations (A/B options)
-6. Include accessibility considerations (contrast ratios, readability)
-
-Output structured design briefs with technical specifications that can be directly used for production.`,
-        placeholder: 'Describe the static design you need — type, dimensions, brand colors, style...',
-        supportsImages: true
+Be the designer who delivers work that's ready for production, not just a concept deck. Practical specs they can use immediately.`,
+        placeholder: 'Describe the design you need — type, platform, brand colors, style...'
     }
 ];
+
+// ===== Constants =====
+const MAX_FILES = 20;
+const MAX_IMAGE_BYTES = 4.5 * 1024 * 1024; // 4.5MB (API limit is 5MB)
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB per file before compression
+const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+const PDF_TYPE = 'application/pdf';
 
 // ===== State =====
 let currentSkillId = null;
 let conversations = {}; // skillId -> [{role, content}]
-let pendingImage = null; // {base64, mediaType}
+let pendingFiles = []; // [{base64, mediaType, fileName, fileType: 'image'|'document'}]
 let isGenerating = false;
 
 // ===== DOM Elements =====
@@ -213,16 +156,215 @@ const chatMessages = $('#chatMessages');
 const chatArea = $('#chatArea');
 const userInput = $('#userInput');
 const sendBtn = $('#sendBtn');
-const imageInput = $('#imageInput');
-const imagePreview = $('#imagePreview');
-const previewImg = $('#previewImg');
-const removeImageBtn = $('#removeImage');
+const fileInput = $('#fileInput');
+const filesPreview = $('#filesPreview');
+const filesPreviewList = $('#filesPreviewList');
+const clearAllFiles = $('#clearAllFiles');
 const mobileToggle = $('#mobileToggle');
 const sidebar = $('#sidebar');
 const toast = $('#toast');
 const toastMessage = $('#toastMessage');
 const currentModelLabel = $('#currentModelLabel');
 const openSettingsBtn = $('#openSettingsBtn');
+
+// ===== Image Compression =====
+function compressImage(file) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+
+        img.onload = () => {
+            URL.revokeObjectURL(url);
+
+            // First check original size
+            const reader = new FileReader();
+            reader.onload = () => {
+                const originalBase64 = reader.result.split(',')[1];
+                const originalBytes = atob(originalBase64).length;
+
+                if (originalBytes <= MAX_IMAGE_BYTES && IMAGE_TYPES.includes(file.type)) {
+                    resolve({
+                        base64: originalBase64,
+                        mediaType: file.type,
+                        fileName: file.name,
+                        fileType: 'image',
+                        previewUrl: reader.result,
+                        size: originalBytes
+                    });
+                    return;
+                }
+
+                // Compress with canvas
+                const canvas = document.createElement('canvas');
+                let width = img.naturalWidth;
+                let height = img.naturalHeight;
+
+                // Scale down if very large
+                const maxDim = 2048;
+                if (width > maxDim || height > maxDim) {
+                    const scale = maxDim / Math.max(width, height);
+                    width = Math.round(width * scale);
+                    height = Math.round(height * scale);
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Try progressively lower quality
+                for (let quality = 0.85; quality >= 0.1; quality -= 0.1) {
+                    const result = canvas.toDataURL('image/jpeg', quality);
+                    const b64 = result.split(',')[1];
+                    const bytes = atob(b64).length;
+                    if (bytes <= MAX_IMAGE_BYTES) {
+                        resolve({
+                            base64: b64,
+                            mediaType: 'image/jpeg',
+                            fileName: file.name,
+                            fileType: 'image',
+                            previewUrl: result,
+                            size: bytes
+                        });
+                        return;
+                    }
+                }
+
+                // Still too large — scale down more
+                canvas.width = Math.round(width * 0.5);
+                canvas.height = Math.round(height * 0.5);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                const result = canvas.toDataURL('image/jpeg', 0.7);
+                const b64 = result.split(',')[1];
+                resolve({
+                    base64: b64,
+                    mediaType: 'image/jpeg',
+                    fileName: file.name,
+                    fileType: 'image',
+                    previewUrl: result,
+                    size: atob(b64).length
+                });
+            };
+            reader.readAsDataURL(file);
+        };
+
+        img.onerror = () => {
+            URL.revokeObjectURL(url);
+            reject(new Error('Failed to load image: ' + file.name));
+        };
+
+        img.src = url;
+    });
+}
+
+// ===== File Processing =====
+function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64 = reader.result.split(',')[1];
+            resolve(base64);
+        };
+        reader.onerror = () => reject(new Error('Failed to read: ' + file.name));
+        reader.readAsDataURL(file);
+    });
+}
+
+function getFileExtension(name) {
+    return name.split('.').pop().toLowerCase();
+}
+
+function getDocMediaType(file) {
+    const ext = getFileExtension(file.name);
+    const map = {
+        'pdf': 'application/pdf',
+        'doc': 'application/msword',
+        'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'xls': 'application/vnd.ms-excel',
+        'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'ppt': 'application/vnd.ms-powerpoint',
+        'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'txt': 'text/plain',
+        'csv': 'text/csv',
+        'rtf': 'application/rtf',
+        'md': 'text/markdown'
+    };
+    return map[ext] || file.type || 'application/octet-stream';
+}
+
+function isImageFile(file) {
+    return IMAGE_TYPES.includes(file.type) || /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name);
+}
+
+function isPdfFile(file) {
+    return file.type === PDF_TYPE || /\.pdf$/i.test(file.name);
+}
+
+async function processFile(file) {
+    if (file.size > MAX_FILE_SIZE) {
+        throw new Error(`${file.name} exceeds 50MB limit`);
+    }
+
+    if (isImageFile(file)) {
+        return await compressImage(file);
+    }
+
+    // Documents (PDF, DOC, TXT, etc.)
+    const base64 = await readFileAsBase64(file);
+    const mediaType = getDocMediaType(file);
+    const ext = getFileExtension(file.name);
+
+    return {
+        base64,
+        mediaType,
+        fileName: file.name,
+        fileType: isPdfFile(file) ? 'document' : 'document',
+        size: atob(base64).length,
+        ext: ext
+    };
+}
+
+// ===== File Preview UI =====
+function renderFilePreviews() {
+    if (pendingFiles.length === 0) {
+        filesPreview.classList.add('hidden');
+        return;
+    }
+
+    filesPreview.classList.remove('hidden');
+    filesPreviewList.innerHTML = pendingFiles.map((f, i) => {
+        const sizeStr = formatSize(f.size);
+        if (f.fileType === 'image' && f.previewUrl) {
+            return `<div class="file-preview-item" title="${escapeHtml(f.fileName)} (${sizeStr})">
+                <img src="${f.previewUrl}" alt="${escapeHtml(f.fileName)}" />
+                <span class="file-preview-name">${escapeHtml(f.fileName)}</span>
+                <button class="file-preview-remove" data-idx="${i}">&times;</button>
+            </div>`;
+        } else {
+            const ext = f.ext || getFileExtension(f.fileName);
+            return `<div class="file-preview-item" title="${escapeHtml(f.fileName)} (${sizeStr})">
+                <div class="file-icon">${ext}</div>
+                <span class="file-preview-name">${escapeHtml(f.fileName)}</span>
+                <button class="file-preview-remove" data-idx="${i}">&times;</button>
+            </div>`;
+        }
+    }).join('') + `<div class="file-count-badge">${pendingFiles.length}/${MAX_FILES}</div>`;
+
+    // Bind remove buttons
+    filesPreviewList.querySelectorAll('.file-preview-remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const idx = parseInt(btn.dataset.idx);
+            pendingFiles.splice(idx, 1);
+            renderFilePreviews();
+        });
+    });
+}
+
+function formatSize(bytes) {
+    if (bytes > 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + 'MB';
+    return Math.round(bytes / 1024) + 'KB';
+}
 
 // ===== Settings Management =====
 function loadSettings() {
@@ -252,7 +394,7 @@ function saveSettings() {
     updateModelLabel(model);
 
     closeSettings();
-    showToast('Settings saved! You\'re ready to go.');
+    showToast('Settings saved!');
 }
 
 function updateModelLabel(model) {
@@ -273,7 +415,6 @@ function closeSettings() {
     settingsOverlay.classList.remove('active');
 }
 
-// Settings event listeners
 openSettingsBtn.addEventListener('click', openSettings);
 settingsClose.addEventListener('click', closeSettings);
 settingsOverlay.addEventListener('click', (e) => {
@@ -281,7 +422,6 @@ settingsOverlay.addEventListener('click', (e) => {
 });
 saveSettingsBtn.addEventListener('click', saveSettings);
 
-// Ctrl+Shift+K shortcut to open settings
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key === 'K') {
         e.preventDefault();
@@ -314,7 +454,6 @@ function selectSkill(skillId) {
     const skill = skills.find(s => s.id === skillId);
     if (!skill) return;
 
-    // Check for API key first
     const apiKey = localStorage.getItem('anthropic_api_key');
     if (!apiKey) {
         openSettings();
@@ -324,34 +463,24 @@ function selectSkill(skillId) {
 
     currentSkillId = skillId;
 
-    // Update sidebar active state
     $$('.skill-item').forEach(item => {
         item.classList.toggle('active', item.dataset.skill === skillId);
     });
 
-    // Update workspace header
     wsSkillIcon.textContent = skill.icon;
     wsSkillName.textContent = skill.name;
     wsSkillDesc.textContent = skill.description;
-
-    // Update input placeholder
     userInput.placeholder = skill.placeholder;
 
-    // Show workspace, hide welcome
     welcomeScreen.classList.add('hidden');
     skillWorkspace.classList.remove('hidden');
 
-    // Initialize conversation if needed
     if (!conversations[skillId]) {
         conversations[skillId] = [];
     }
 
     renderMessages();
-
-    // Close mobile sidebar
     sidebar.classList.remove('open');
-
-    // Focus input
     userInput.focus();
 }
 
@@ -365,21 +494,18 @@ function renderMessages() {
             <div class="chat-msg">
                 <div class="msg-avatar assistant">AI</div>
                 <div class="msg-body">
-                    <div class="msg-role">AI Skills Hub</div>
+                    <div class="msg-role">Claude</div>
                     <div class="msg-content">
                         <p><strong>${skill.name}</strong> is ready. ${skill.description}.</p>
-                        <p>Type your brief below or upload an image to get started.</p>
+                        <p>Type your message below or upload files to get started.</p>
                     </div>
                 </div>
             </div>
         `;
     } else {
         chatMessages.innerHTML = msgs.map(msg => {
-            if (msg.role === 'user') {
-                return renderUserMessage(msg);
-            } else if (msg.role === 'assistant') {
-                return renderAssistantMessage(msg);
-            }
+            if (msg.role === 'user') return renderUserMessage(msg);
+            if (msg.role === 'assistant') return renderAssistantMessage(msg);
             return '';
         }).join('');
     }
@@ -388,9 +514,16 @@ function renderMessages() {
 }
 
 function renderUserMessage(msg) {
-    let imageHtml = '';
-    if (msg.image) {
-        imageHtml = `<img class="msg-image" src="data:${msg.image.mediaType};base64,${msg.image.base64}" alt="Uploaded image" />`;
+    let filesHtml = '';
+    if (msg.files && msg.files.length > 0) {
+        filesHtml = '<div class="msg-files">' + msg.files.map(f => {
+            if (f.fileType === 'image' && f.previewUrl) {
+                return `<img class="msg-image" src="${f.previewUrl}" alt="${escapeHtml(f.fileName)}" />`;
+            } else {
+                const ext = f.ext || getFileExtension(f.fileName);
+                return `<span class="msg-file-badge">${ext.toUpperCase()}: ${escapeHtml(f.fileName)}</span>`;
+            }
+        }).join('') + '</div>';
     }
 
     return `
@@ -399,7 +532,7 @@ function renderUserMessage(msg) {
             <div class="msg-body">
                 <div class="msg-role">You</div>
                 <div class="msg-content">
-                    ${imageHtml}
+                    ${filesHtml}
                     <p>${escapeHtml(msg.text)}</p>
                 </div>
             </div>
@@ -418,7 +551,7 @@ function renderAssistantMessage(msg) {
         <div class="chat-msg">
             <div class="msg-avatar assistant">AI</div>
             <div class="msg-body">
-                <div class="msg-role">${skills.find(s => s.id === currentSkillId)?.name || 'Assistant'}</div>
+                <div class="msg-role">Claude</div>
                 ${contentHtml}
             </div>
         </div>
@@ -430,7 +563,7 @@ async function sendMessage() {
     if (isGenerating) return;
 
     const text = userInput.value.trim();
-    if (!text && !pendingImage) return;
+    if (!text && pendingFiles.length === 0) return;
 
     const apiKey = localStorage.getItem('anthropic_api_key');
     if (!apiKey) {
@@ -442,16 +575,21 @@ async function sendMessage() {
     const skill = skills.find(s => s.id === currentSkillId);
     if (!skill) return;
 
-    // Add user message
-    const userMsg = { role: 'user', text: text || '(image uploaded)', image: pendingImage };
+    // Add user message with files
+    const userMsg = {
+        role: 'user',
+        text: text || (pendingFiles.length > 0 ? `(${pendingFiles.length} file${pendingFiles.length > 1 ? 's' : ''} uploaded)` : ''),
+        files: [...pendingFiles]
+    };
     conversations[currentSkillId].push(userMsg);
 
     // Clear input
     userInput.value = '';
     userInput.style.height = 'auto';
-    clearImage();
+    pendingFiles = [];
+    renderFilePreviews();
 
-    // Add loading assistant message
+    // Add loading
     conversations[currentSkillId].push({ role: 'assistant', loading: true });
     renderMessages();
 
@@ -462,7 +600,6 @@ async function sendMessage() {
         const model = modelSelect.value;
         const response = await callClaudeAPI(apiKey, model, skill, conversations[currentSkillId].slice(0, -1));
 
-        // Replace loading with response
         const lastIdx = conversations[currentSkillId].length - 1;
         conversations[currentSkillId][lastIdx] = { role: 'assistant', text: response };
     } catch (err) {
@@ -475,17 +612,69 @@ async function sendMessage() {
     renderMessages();
 }
 
-// ===== Claude API Call (Direct — no proxy needed) =====
+// ===== Claude API Call =====
 async function callClaudeAPI(apiKey, model, skill, messages) {
     const url = 'https://api.anthropic.com/v1/messages';
 
-    // Build message content array from conversation
     const apiMessages = [];
 
     for (const msg of messages) {
         if (msg.role === 'user') {
             const content = [];
 
+            // Add files
+            if (msg.files) {
+                for (const f of msg.files) {
+                    if (f.fileType === 'image') {
+                        content.push({
+                            type: 'image',
+                            source: {
+                                type: 'base64',
+                                media_type: f.mediaType,
+                                data: f.base64
+                            }
+                        });
+                    } else {
+                        // Documents (PDF, etc.) — use document type for PDF, plain text for others
+                        if (f.mediaType === 'application/pdf') {
+                            content.push({
+                                type: 'document',
+                                source: {
+                                    type: 'base64',
+                                    media_type: 'application/pdf',
+                                    data: f.base64
+                                }
+                            });
+                        } else if (f.mediaType.startsWith('text/') || ['text/plain', 'text/csv', 'text/markdown'].includes(f.mediaType)) {
+                            // Text files — decode and send as text
+                            try {
+                                const decoded = atob(f.base64);
+                                content.push({
+                                    type: 'text',
+                                    text: `[File: ${f.fileName}]\n${decoded}`
+                                });
+                            } catch {
+                                content.push({
+                                    type: 'text',
+                                    text: `[File: ${f.fileName}] (binary file — could not decode as text)`
+                                });
+                            }
+                        } else {
+                            // Other docs — try to send as document type
+                            content.push({
+                                type: 'document',
+                                source: {
+                                    type: 'base64',
+                                    media_type: f.mediaType,
+                                    data: f.base64
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Legacy single image support
             if (msg.image) {
                 content.push({
                     type: 'image',
@@ -501,7 +690,9 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
                 content.push({ type: 'text', text: msg.text });
             }
 
-            apiMessages.push({ role: 'user', content });
+            if (content.length > 0) {
+                apiMessages.push({ role: 'user', content });
+            }
         } else if (msg.role === 'assistant' && msg.text) {
             apiMessages.push({ role: 'assistant', content: msg.text });
         }
@@ -509,10 +700,15 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
 
     const body = {
         model: model,
-        max_tokens: 4096,
+        max_tokens: 8192,
         system: skill.systemPrompt,
         messages: apiMessages
     };
+
+    // Enable PDF support
+    if (messages.some(m => m.files?.some(f => f.mediaType === 'application/pdf'))) {
+        body.betas = ['pdfs-2024-09-25'];
+    }
 
     const response = await fetch(url, {
         method: 'POST',
@@ -530,10 +726,10 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
         const errorMsg = errorData.error?.message || `API error: ${response.status}`;
 
         if (response.status === 401) {
-            throw new Error('Invalid API key. Please check your key in Settings.');
+            throw new Error('Invalid API key. Check Settings (Ctrl+Shift+K).');
         }
         if (response.status === 429) {
-            throw new Error('Rate limited. Please wait a moment and try again.');
+            throw new Error('Rate limited. Wait a moment and try again.');
         }
         if (response.status === 400) {
             throw new Error('Bad request: ' + errorMsg);
@@ -547,37 +743,105 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
     return textBlock?.text || 'No response generated.';
 }
 
-// ===== Image Upload =====
-imageInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+// ===== File Upload Handler =====
+fileInput.addEventListener('change', async (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
 
-    if (file.size > 20 * 1024 * 1024) {
-        showToast('Image must be under 20MB');
+    const remaining = MAX_FILES - pendingFiles.length;
+    if (remaining <= 0) {
+        showToast(`Maximum ${MAX_FILES} files reached`);
+        fileInput.value = '';
         return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-        const base64Full = reader.result;
-        const mediaType = file.type;
-        const base64 = base64Full.split(',')[1];
+    const toProcess = files.slice(0, remaining);
+    if (files.length > remaining) {
+        showToast(`Only adding ${remaining} files (max ${MAX_FILES})`);
+    }
 
-        pendingImage = { base64, mediaType };
-        previewImg.src = base64Full;
-        imagePreview.classList.remove('hidden');
-    };
-    reader.readAsDataURL(file);
-    imageInput.value = '';
+    showToast(`Processing ${toProcess.length} file${toProcess.length > 1 ? 's' : ''}...`);
+
+    let processed = 0;
+    let errors = [];
+
+    for (const file of toProcess) {
+        try {
+            const result = await processFile(file);
+            pendingFiles.push(result);
+            processed++;
+        } catch (err) {
+            errors.push(err.message);
+        }
+    }
+
+    renderFilePreviews();
+    fileInput.value = '';
+
+    if (errors.length > 0) {
+        showToast(`${processed} added, ${errors.length} failed: ${errors[0]}`);
+    } else {
+        showToast(`${processed} file${processed > 1 ? 's' : ''} ready`);
+    }
 });
 
-removeImageBtn.addEventListener('click', clearImage);
+clearAllFiles.addEventListener('click', () => {
+    pendingFiles = [];
+    renderFilePreviews();
+});
 
-function clearImage() {
-    pendingImage = null;
-    imagePreview.classList.add('hidden');
-    previewImg.src = '';
-}
+// ===== Drag & Drop =====
+const mainContent = $('#mainContent');
+
+mainContent.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    mainContent.classList.add('drag-over');
+});
+
+mainContent.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    mainContent.classList.remove('drag-over');
+});
+
+mainContent.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    mainContent.classList.remove('drag-over');
+
+    if (!currentSkillId) {
+        showToast('Select a skill first');
+        return;
+    }
+
+    const files = Array.from(e.dataTransfer.files);
+    if (!files.length) return;
+
+    const remaining = MAX_FILES - pendingFiles.length;
+    if (remaining <= 0) {
+        showToast(`Maximum ${MAX_FILES} files reached`);
+        return;
+    }
+
+    const toProcess = files.slice(0, remaining);
+    showToast(`Processing ${toProcess.length} file${toProcess.length > 1 ? 's' : ''}...`);
+
+    let processed = 0;
+    for (const file of toProcess) {
+        try {
+            const result = await processFile(file);
+            pendingFiles.push(result);
+            processed++;
+        } catch (err) {
+            showToast('Error: ' + err.message);
+        }
+    }
+
+    renderFilePreviews();
+    if (processed > 0) {
+        showToast(`${processed} file${processed > 1 ? 's' : ''} ready`);
+    }
+});
 
 // ===== Input Handling =====
 userInput.addEventListener('keydown', (e) => {
@@ -601,7 +865,6 @@ clearChatBtn.addEventListener('click', () => {
     }
 });
 
-// ===== Model Select =====
 modelSelect.addEventListener('change', () => {
     updateModelLabel(modelSelect.value);
 });
@@ -611,7 +874,6 @@ mobileToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
 });
 
-// Close sidebar when clicking outside on mobile
 document.addEventListener('click', (e) => {
     if (window.innerWidth <= 768 &&
         sidebar.classList.contains('open') &&
@@ -640,13 +902,12 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
-// Simple markdown to HTML converter
 function markdownToHtml(md) {
     if (!md) return '';
 
     let html = escapeHtml(md);
 
-    // Code blocks (```)
+    // Code blocks
     html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
         return `<pre><code>${code.trim()}</code></pre>`;
     });
@@ -675,11 +936,10 @@ function markdownToHtml(md) {
     // Ordered lists
     html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
 
-    // Line breaks -> paragraphs
+    // Paragraphs
     html = html.replace(/\n\n/g, '</p><p>');
     html = html.replace(/\n/g, '<br>');
 
-    // Wrap in paragraph if not already wrapped
     if (!html.startsWith('<')) {
         html = '<p>' + html + '</p>';
     }
@@ -692,7 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSkillList();
     loadSettings();
 
-    // Auto-open settings if no API key is configured
     if (!localStorage.getItem('anthropic_api_key')) {
         setTimeout(openSettings, 500);
     }
