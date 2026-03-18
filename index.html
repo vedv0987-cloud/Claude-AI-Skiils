@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude AI Skills Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 16L14 20L22 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span>Claude AI Skills</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#workflow" class="nav-link">Workflow</a>
+                <a href="#playground" class="nav-link">Playground</a>
+                <a href="#team" class="nav-link">Team</a>
+                <a href="#docs" class="nav-link">Docs</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Powered by Claude Opus 4.6
+            </div>
+            <h1 class="hero-title">
+                Your Team's
+                <span class="gradient-text">AI Skills</span>
+                Command Center
+            </h1>
+            <p class="hero-subtitle">
+                Unlock the full power of Claude AI with an interactive skills dashboard.
+                Explore, test, and deploy AI capabilities directly from your browser.
+            </p>
+            <div class="hero-actions">
+                <a href="#skills" class="btn btn-primary">
+                    <span>Explore Skills</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#playground" class="btn btn-secondary">
+                    <span>Try Playground</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="12">0</span>
+                    <span class="stat-label">AI Skills</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="6">0</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="99">0</span>
+                    <span class="stat-label">% Uptime</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">claude-code</span>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="terminal-line">
+                        <span class="prompt">$</span>
+                        <span class="typing" id="terminalTyping"></span>
+                        <span class="cursor">|</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Skills Library</span>
+                <h2 class="section-title">Claude AI <span class="gradient-text">Skills</span></h2>
+                <p class="section-subtitle">A comprehensive collection of AI-powered skills available to your team</p>
+            </div>
+
+            <!-- Skills Filter -->
+            <div class="skills-filter">
+                <button class="filter-btn active" data-filter="all">All Skills</button>
+                <button class="filter-btn" data-filter="code">Code</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="workflow">Workflow</button>
+                <button class="filter-btn" data-filter="data">Data</button>
+                <button class="filter-btn" data-filter="docs">Docs</button>
+            </div>
+
+            <!-- Skills Search -->
+            <div class="skills-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="skillSearch" placeholder="Search skills..." />
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="skills-grid" id="skillsGrid">
+                <!-- Cards injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="section section-alt" id="workflow">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title">Skill <span class="gradient-text">Workflow</span></h2>
+                <p class="section-subtitle">From invocation to execution in seconds</p>
+            </div>
+            <div class="workflow-timeline">
+                <div class="workflow-step" data-step="1">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>1. Select a Skill</h3>
+                        <p>Browse the skills library and pick the tool that matches your task. Use filters and search to find exactly what you need.</p>
+                    </div>
+                </div>
+                <div class="workflow-step" data-step="2">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>2. Configure Parameters</h3>
+                        <p>Set the input parameters for your chosen skill. The playground provides real-time validation and helpful defaults.</p>
+                    </div>
+                </div>
+                <div class="workflow-step" data-step="3">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>3. Execute & Review</h3>
+                        <p>Run the skill and review the results. Claude processes your request intelligently and returns structured output.</p>
+                    </div>
+                </div>
+                <div class="workflow-step" data-step="4">
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>4. Deploy & Share</h3>
+                        <p>Apply the results to your project. Share skill configurations with your team for consistent workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Playground -->
+    <section class="section" id="playground">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Interactive</span>
+                <h2 class="section-title">Skills <span class="gradient-text">Playground</span></h2>
+                <p class="section-subtitle">Test skills live and see results in real-time</p>
+            </div>
+            <div class="playground-container">
+                <div class="playground-sidebar">
+                    <h3>Select Skill</h3>
+                    <div class="playground-skill-list" id="playgroundSkillList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="playground-main">
+                    <div class="playground-editor">
+                        <div class="editor-header">
+                            <span class="editor-tab active">Input</span>
+                            <span class="editor-tab" id="outputTab">Output</span>
+                        </div>
+                        <div class="editor-body">
+                            <div class="input-panel" id="inputPanel">
+                                <div class="input-group">
+                                    <label>Skill Command</label>
+                                    <div class="command-input">
+                                        <span class="command-prefix">/</span>
+                                        <input type="text" id="skillCommand" placeholder="commit" readonly />
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Parameters</label>
+                                    <textarea id="skillParams" placeholder='Enter parameters or arguments...' rows="4"></textarea>
+                                </div>
+                                <div class="input-group">
+                                    <label>Context (optional)</label>
+                                    <textarea id="skillContext" placeholder="Add additional context for the skill..." rows="3"></textarea>
+                                </div>
+                                <button class="btn btn-primary btn-run" id="runSkill">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                        <polygon points="5 3 19 12 5 21 5 3"/>
+                                    </svg>
+                                    <span>Run Skill</span>
+                                </button>
+                            </div>
+                            <div class="output-panel hidden" id="outputPanel">
+                                <div class="output-content" id="outputContent">
+                                    <p class="output-placeholder">Run a skill to see output here...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Detail Modal -->
+    <div class="modal-overlay" id="skillModal">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon"></div>
+                <div>
+                    <h2 id="modalTitle"></h2>
+                    <span class="modal-category" id="modalCategory"></span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Description</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Usage</h3>
+                    <div class="code-block" id="modalUsage"></div>
+                </div>
+                <div class="modal-section">
+                    <h3>When to Use</h3>
+                    <ul id="modalTriggers"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Examples</h3>
+                    <div id="modalExamples"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalTryBtn">Try in Playground</button>
+                <button class="btn btn-primary" id="modalCopyBtn">Copy Command</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <section class="section section-alt" id="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Collaboration</span>
+                <h2 class="section-title">Team <span class="gradient-text">Dashboard</span></h2>
+                <p class="section-subtitle">Track skill usage and team activity</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Skill Usage Today</h3>
+                        <span class="card-badge up">+12%</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Popular Skills</h3>
+                    </div>
+                    <div class="popular-skills" id="popularSkills">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="activity-feed" id="activityFeed">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Quick Stats</h3>
+                    </div>
+                    <div class="quick-stats">
+                        <div class="quick-stat">
+                            <span class="qs-value">847</span>
+                            <span class="qs-label">Total Runs</span>
+                        </div>
+                        <div class="quick-stat">
+                            <span class="qs-value">1.2s</span>
+                            <span class="qs-label">Avg Response</span>
+                        </div>
+                        <div class="quick-stat">
+                            <span class="qs-value">98.5%</span>
+                            <span class="qs-label">Success Rate</span>
+                        </div>
+                        <div class="quick-stat">
+                            <span class="qs-value">5</span>
+                            <span class="qs-label">Team Members</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="section" id="docs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Reference</span>
+                <h2 class="section-title">Quick <span class="gradient-text">Reference</span></h2>
+                <p class="section-subtitle">Everything you need to get started with Claude AI Skills</p>
+            </div>
+            <div class="docs-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Getting Started</h3>
+                    <p>Install Claude Code CLI and configure your environment. Set up API keys and permissions for your team.</p>
+                    <div class="code-block">
+                        <code>npm install -g @anthropic-ai/claude-code</code>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Skill Configuration</h3>
+                    <p>Configure skills in <code>settings.json</code>. Set up hooks, permissions, and environment variables.</p>
+                    <div class="code-block">
+                        <code>/update-config</code>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Team Setup</h3>
+                    <p>Share skills across your team with shared configs. Use <code>CLAUDE.md</code> for project-level settings.</p>
+                    <div class="code-block">
+                        <code>claude --project-config ./CLAUDE.md</code>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>API Integration</h3>
+                    <p>Build custom skills using the Claude API and Anthropic SDK for specialized team workflows.</p>
+                    <div class="code-block">
+                        <code>/claude-api</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                                <path d="M10 16L14 20L22 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span>Claude AI Skills</span>
+                    </div>
+                    <p>Your team's interactive AI skills hub. Powered by Claude Opus 4.6.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Skills</h4>
+                    <a href="#skills">All Skills</a>
+                    <a href="#playground">Playground</a>
+                    <a href="#workflow">Workflow</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#docs">Documentation</a>
+                    <a href="#team">Team Dashboard</a>
+                    <a href="#">Changelog</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">GitHub Issues</a>
+                    <a href="#">Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Claude AI Skills Hub. Built with Claude Code.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
