@@ -140,9 +140,11 @@ const $$ = (sel) => document.querySelectorAll(sel);
 const settingsOverlay = $('#settingsOverlay');
 const settingsClose = $('#settingsClose');
 const apiKeyInput = $('#apiKeyInput');
+const openaiKeyInput = $('#openaiKeyInput');
 const defaultModelSelect = $('#defaultModelSelect');
 const saveSettingsBtn = $('#saveSettings');
 const toggleKeyVis = $('#toggleKeyVis');
+const toggleOpenaiKeyVis = $('#toggleOpenaiKeyVis');
 
 const skillList = $('#skillList');
 const welcomeScreen = $('#welcomeScreen');
@@ -366,12 +368,27 @@ function formatSize(bytes) {
     return Math.round(bytes / 1024) + 'KB';
 }
 
+// ===== Provider Detection =====
+function isOpenAIModel(model) {
+    return model.startsWith('gpt-') || model.startsWith('o3') || model.startsWith('o4') || model.startsWith('o1');
+}
+
+function isClaudeModel(model) {
+    return model.startsWith('claude-');
+}
+
+function getProviderForModel(model) {
+    return isOpenAIModel(model) ? 'openai' : 'anthropic';
+}
+
 // ===== Settings Management =====
 function loadSettings() {
     const key = localStorage.getItem('anthropic_api_key') || '';
+    const openaiKey = localStorage.getItem('openai_api_key') || '';
     const model = localStorage.getItem('default_model') || 'claude-sonnet-4-6';
 
     apiKeyInput.value = key;
+    openaiKeyInput.value = openaiKey;
     defaultModelSelect.value = model;
     modelSelect.value = model;
     updateModelLabel(model);
@@ -379,15 +396,17 @@ function loadSettings() {
 
 function saveSettings() {
     const key = apiKeyInput.value.trim();
+    const openaiKey = openaiKeyInput.value.trim();
     const model = defaultModelSelect.value;
 
-    if (!key) {
-        showToast('Please enter your API key');
+    if (!key && !openaiKey) {
+        showToast('Please enter at least one API key');
         apiKeyInput.focus();
         return;
     }
 
-    localStorage.setItem('anthropic_api_key', key);
+    if (key) localStorage.setItem('anthropic_api_key', key);
+    if (openaiKey) localStorage.setItem('openai_api_key', openaiKey);
     localStorage.setItem('default_model', model);
 
     modelSelect.value = model;
@@ -401,9 +420,20 @@ function updateModelLabel(model) {
     const labels = {
         'claude-sonnet-4-6': 'Sonnet 4.6',
         'claude-haiku-4-5-20251001': 'Haiku 4.5',
-        'claude-opus-4-6': 'Opus 4.6'
+        'claude-opus-4-6': 'Opus 4.6',
+        'gpt-4o': 'GPT-4o',
+        'gpt-4o-mini': 'GPT-4o Mini',
+        'gpt-4.1': 'GPT-4.1',
+        'o3': 'o3',
+        'o4-mini': 'o4-mini'
     };
+    const provider = isOpenAIModel(model) ? 'GPT' : 'Claude';
     currentModelLabel.textContent = labels[model] || model;
+    // Update dot color based on provider
+    const dot = document.querySelector('.model-dot');
+    if (dot) {
+        dot.style.background = isOpenAIModel(model) ? '#10a37f' : 'var(--success)';
+    }
 }
 
 function openSettings() {
@@ -435,6 +465,12 @@ toggleKeyVis.addEventListener('click', () => {
     toggleKeyVis.textContent = isPassword ? 'Hide' : 'Show';
 });
 
+toggleOpenaiKeyVis.addEventListener('click', () => {
+    const isPassword = openaiKeyInput.type === 'password';
+    openaiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleOpenaiKeyVis.textContent = isPassword ? 'Hide' : 'Show';
+});
+
 // ===== Render Skill List =====
 function renderSkillList() {
     skillList.innerHTML = skills.map(s => `
@@ -454,10 +490,10 @@ function selectSkill(skillId) {
     const skill = skills.find(s => s.id === skillId);
     if (!skill) return;
 
-    const apiKey = localStorage.getItem('anthropic_api_key');
-    if (!apiKey) {
+    const hasAnyKey = localStorage.getItem('anthropic_api_key') || localStorage.getItem('openai_api_key');
+    if (!hasAnyKey) {
         openSettings();
-        showToast('Please enter your API key first');
+        showToast('Please enter an API key first');
         return;
     }
 
@@ -547,11 +583,15 @@ function renderAssistantMessage(msg) {
             ? `<div class="msg-error">${escapeHtml(msg.error)}</div>`
             : `<div class="msg-content">${markdownToHtml(msg.text)}</div>`;
 
+    const model = modelSelect.value;
+    const providerLabel = isOpenAIModel(model) ? 'GPT' : 'Claude';
+    const avatarClass = isOpenAIModel(model) ? 'assistant openai' : 'assistant';
+
     return `
         <div class="chat-msg">
-            <div class="msg-avatar assistant">AI</div>
+            <div class="msg-avatar ${avatarClass}">AI</div>
             <div class="msg-body">
-                <div class="msg-role">Claude</div>
+                <div class="msg-role">${providerLabel}</div>
                 ${contentHtml}
             </div>
         </div>
@@ -565,10 +605,17 @@ async function sendMessage() {
     const text = userInput.value.trim();
     if (!text && pendingFiles.length === 0) return;
 
-    const apiKey = localStorage.getItem('anthropic_api_key');
+    const model = modelSelect.value;
+    const provider = getProviderForModel(model);
+
+    // Check for the right API key
+    const apiKey = provider === 'openai'
+        ? localStorage.getItem('openai_api_key')
+        : localStorage.getItem('anthropic_api_key');
+
     if (!apiKey) {
         openSettings();
-        showToast('Please enter your API key first');
+        showToast(`Please enter your ${provider === 'openai' ? 'OpenAI' : 'Anthropic'} API key`);
         return;
     }
 
@@ -597,8 +644,12 @@ async function sendMessage() {
     sendBtn.disabled = true;
 
     try {
-        const model = modelSelect.value;
-        const response = await callClaudeAPI(apiKey, model, skill, conversations[currentSkillId].slice(0, -1));
+        let response;
+        if (provider === 'openai') {
+            response = await callOpenAIAPI(apiKey, model, skill, conversations[currentSkillId].slice(0, -1));
+        } else {
+            response = await callClaudeAPI(apiKey, model, skill, conversations[currentSkillId].slice(0, -1));
+        }
 
         const lastIdx = conversations[currentSkillId].length - 1;
         conversations[currentSkillId][lastIdx] = { role: 'assistant', text: response };
@@ -741,6 +792,136 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
     const data = await response.json();
     const textBlock = data.content?.find(c => c.type === 'text');
     return textBlock?.text || 'No response generated.';
+}
+
+// ===== OpenAI API Call =====
+async function callOpenAIAPI(apiKey, model, skill, messages) {
+    const url = 'https://api.openai.com/v1/chat/completions';
+
+    const isReasoningModel = /^(o1|o3|o4)/.test(model);
+
+    // Build messages array for OpenAI format
+    const apiMessages = [];
+
+    // System message (reasoning models use developer role)
+    if (isReasoningModel) {
+        apiMessages.push({ role: 'developer', content: skill.systemPrompt });
+    } else {
+        apiMessages.push({ role: 'system', content: skill.systemPrompt });
+    }
+
+    for (const msg of messages) {
+        if (msg.role === 'user') {
+            const content = [];
+
+            // Add files
+            if (msg.files) {
+                for (const f of msg.files) {
+                    if (f.fileType === 'image') {
+                        content.push({
+                            type: 'image_url',
+                            image_url: {
+                                url: `data:${f.mediaType};base64,${f.base64}`,
+                                detail: 'high'
+                            }
+                        });
+                    } else if (f.mediaType.startsWith('text/') || ['text/plain', 'text/csv', 'text/markdown'].includes(f.mediaType)) {
+                        try {
+                            const decoded = atob(f.base64);
+                            content.push({
+                                type: 'text',
+                                text: `[File: ${f.fileName}]\n${decoded}`
+                            });
+                        } catch {
+                            content.push({
+                                type: 'text',
+                                text: `[File: ${f.fileName}] (could not decode)`
+                            });
+                        }
+                    } else if (f.mediaType === 'application/pdf') {
+                        content.push({
+                            type: 'file',
+                            file: {
+                                filename: f.fileName,
+                                file_data: `data:application/pdf;base64,${f.base64}`
+                            }
+                        });
+                    } else {
+                        content.push({
+                            type: 'text',
+                            text: `[File: ${f.fileName}] (${f.mediaType} — binary file attached)`
+                        });
+                    }
+                }
+            }
+
+            // Legacy single image
+            if (msg.image) {
+                content.push({
+                    type: 'image_url',
+                    image_url: {
+                        url: `data:${msg.image.mediaType};base64,${msg.image.base64}`,
+                        detail: 'high'
+                    }
+                });
+            }
+
+            if (msg.text) {
+                content.push({ type: 'text', text: msg.text });
+            }
+
+            // If only text, simplify to string
+            if (content.length === 1 && content[0].type === 'text') {
+                apiMessages.push({ role: 'user', content: content[0].text });
+            } else if (content.length > 0) {
+                apiMessages.push({ role: 'user', content });
+            }
+        } else if (msg.role === 'assistant' && msg.text) {
+            apiMessages.push({ role: 'assistant', content: msg.text });
+        }
+    }
+
+    const body = {
+        model: model,
+        messages: apiMessages
+    };
+
+    // Reasoning models: use reasoning_effort instead of max_tokens
+    if (isReasoningModel) {
+        body.reasoning_effort = 'high';
+        body.max_completion_tokens = 16384;
+    } else {
+        body.max_tokens = 8192;
+    }
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = errorData.error?.message || `OpenAI API error: ${response.status}`;
+
+        if (response.status === 401) {
+            throw new Error('Invalid OpenAI API key. Check Settings (Ctrl+Shift+K).');
+        }
+        if (response.status === 429) {
+            throw new Error('OpenAI rate limited. Wait a moment and try again.');
+        }
+        if (response.status === 400) {
+            throw new Error('Bad request: ' + errorMsg);
+        }
+
+        throw new Error(errorMsg);
+    }
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || 'No response generated.';
 }
 
 // ===== File Upload Handler =====
@@ -952,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSkillList();
     loadSettings();
 
-    if (!localStorage.getItem('anthropic_api_key')) {
+    if (!localStorage.getItem('anthropic_api_key') && !localStorage.getItem('openai_api_key')) {
         setTimeout(openSettings, 500);
     }
 });

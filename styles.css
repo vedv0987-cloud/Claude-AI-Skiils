@@ -421,6 +421,10 @@ a:hover { color: var(--accent-hover); }
     background: linear-gradient(135deg, #7c5cfc, #a855f7);
 }
 
+.msg-avatar.assistant.openai {
+    background: linear-gradient(135deg, #10a37f, #1a7f5a);
+}
+
 .msg-body {
     flex: 1;
     min-width: 0;
