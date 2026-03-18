@@ -197,13 +197,9 @@ const $$ = (sel) => document.querySelectorAll(sel);
 const settingsOverlay = $('#settingsOverlay');
 const settingsClose = $('#settingsClose');
 const apiKeyInput = $('#apiKeyInput');
-const proxyUrlInput = $('#proxyUrlInput');
 const defaultModelSelect = $('#defaultModelSelect');
 const saveSettingsBtn = $('#saveSettings');
 const toggleKeyVis = $('#toggleKeyVis');
-const showProxyHelp = $('#showProxyHelp');
-const proxyGuide = $('#proxyGuide');
-const closeProxyGuide = $('#closeProxyGuide');
 
 const skillList = $('#skillList');
 const welcomeScreen = $('#welcomeScreen');
@@ -226,15 +222,14 @@ const sidebar = $('#sidebar');
 const toast = $('#toast');
 const toastMessage = $('#toastMessage');
 const currentModelLabel = $('#currentModelLabel');
+const openSettingsBtn = $('#openSettingsBtn');
 
 // ===== Settings Management =====
 function loadSettings() {
     const key = localStorage.getItem('anthropic_api_key') || '';
-    const proxy = localStorage.getItem('proxy_url') || '';
     const model = localStorage.getItem('default_model') || 'claude-sonnet-4-6';
 
     apiKeyInput.value = key;
-    proxyUrlInput.value = proxy;
     defaultModelSelect.value = model;
     modelSelect.value = model;
     updateModelLabel(model);
@@ -242,18 +237,22 @@ function loadSettings() {
 
 function saveSettings() {
     const key = apiKeyInput.value.trim();
-    const proxy = proxyUrlInput.value.trim();
     const model = defaultModelSelect.value;
 
+    if (!key) {
+        showToast('Please enter your API key');
+        apiKeyInput.focus();
+        return;
+    }
+
     localStorage.setItem('anthropic_api_key', key);
-    localStorage.setItem('proxy_url', proxy);
     localStorage.setItem('default_model', model);
 
     modelSelect.value = model;
     updateModelLabel(model);
 
     closeSettings();
-    showToast('Settings saved');
+    showToast('Settings saved! You\'re ready to go.');
 }
 
 function updateModelLabel(model) {
@@ -272,27 +271,15 @@ function openSettings() {
 
 function closeSettings() {
     settingsOverlay.classList.remove('active');
-    proxyGuide.classList.add('hidden');
 }
 
-// Settings event listeners — Admin only: click logo 5 times or add ?admin to URL
-let logoClickCount = 0;
-let logoClickTimer = null;
-document.querySelector('.logo').addEventListener('click', () => {
-    logoClickCount++;
-    clearTimeout(logoClickTimer);
-    if (logoClickCount >= 5) {
-        logoClickCount = 0;
-        openSettings();
-    } else {
-        logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
-    }
+// Settings event listeners
+openSettingsBtn.addEventListener('click', openSettings);
+settingsClose.addEventListener('click', closeSettings);
+settingsOverlay.addEventListener('click', (e) => {
+    if (e.target === settingsOverlay) closeSettings();
 });
-
-// Also allow ?admin in URL
-if (window.location.search.includes('admin')) {
-    setTimeout(openSettings, 500);
-}
+saveSettingsBtn.addEventListener('click', saveSettings);
 
 // Ctrl+Shift+K shortcut to open settings
 document.addEventListener('keydown', (e) => {
@@ -302,25 +289,10 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-settingsClose.addEventListener('click', closeSettings);
-settingsOverlay.addEventListener('click', (e) => {
-    if (e.target === settingsOverlay) closeSettings();
-});
-saveSettingsBtn.addEventListener('click', saveSettings);
-
 toggleKeyVis.addEventListener('click', () => {
     const isPassword = apiKeyInput.type === 'password';
     apiKeyInput.type = isPassword ? 'text' : 'password';
     toggleKeyVis.textContent = isPassword ? 'Hide' : 'Show';
-});
-
-showProxyHelp.addEventListener('click', (e) => {
-    e.preventDefault();
-    proxyGuide.classList.toggle('hidden');
-});
-
-closeProxyGuide.addEventListener('click', () => {
-    proxyGuide.classList.add('hidden');
 });
 
 // ===== Render Skill List =====
@@ -341,6 +313,14 @@ function renderSkillList() {
 function selectSkill(skillId) {
     const skill = skills.find(s => s.id === skillId);
     if (!skill) return;
+
+    // Check for API key first
+    const apiKey = localStorage.getItem('anthropic_api_key');
+    if (!apiKey) {
+        openSettings();
+        showToast('Please enter your API key first');
+        return;
+    }
 
     currentSkillId = skillId;
 
@@ -454,7 +434,8 @@ async function sendMessage() {
 
     const apiKey = localStorage.getItem('anthropic_api_key');
     if (!apiKey) {
-        showToast('Service not configured yet. Contact your admin.');
+        openSettings();
+        showToast('Please enter your API key first');
         return;
     }
 
@@ -494,11 +475,9 @@ async function sendMessage() {
     renderMessages();
 }
 
-// ===== Claude API Call =====
+// ===== Claude API Call (Direct — no proxy needed) =====
 async function callClaudeAPI(apiKey, model, skill, messages) {
-    const proxyUrl = localStorage.getItem('proxy_url') || '';
-    const baseUrl = proxyUrl ? proxyUrl.replace(/\/+$/, '') : 'https://api.anthropic.com';
-    const url = `${baseUrl}/v1/messages`;
+    const url = 'https://api.anthropic.com/v1/messages';
 
     // Build message content array from conversation
     const apiMessages = [];
@@ -550,8 +529,14 @@ async function callClaudeAPI(apiKey, model, skill, messages) {
         const errorData = await response.json().catch(() => ({}));
         const errorMsg = errorData.error?.message || `API error: ${response.status}`;
 
-        if (response.status === 0 || errorMsg.includes('CORS') || errorMsg.includes('fetch')) {
-            throw new Error('CORS error: Set up a proxy URL in Settings. The Anthropic API requires a CORS proxy for browser access.');
+        if (response.status === 401) {
+            throw new Error('Invalid API key. Please check your key in Settings.');
+        }
+        if (response.status === 429) {
+            throw new Error('Rate limited. Please wait a moment and try again.');
+        }
+        if (response.status === 400) {
+            throw new Error('Bad request: ' + errorMsg);
         }
 
         throw new Error(errorMsg);
@@ -706,4 +691,9 @@ function markdownToHtml(md) {
 document.addEventListener('DOMContentLoaded', () => {
     renderSkillList();
     loadSettings();
+
+    // Auto-open settings if no API key is configured
+    if (!localStorage.getItem('anthropic_api_key')) {
+        setTimeout(openSettings, 500);
+    }
 });

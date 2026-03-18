@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
     <!-- Settings Modal -->
@@ -27,11 +27,6 @@
                     <span class="setting-hint">Your key is stored locally in your browser only. Never sent to any server except Anthropic.</span>
                 </div>
                 <div class="setting-group">
-                    <label>API Proxy URL <span class="optional-tag" style="color:#888">Optional</span></label>
-                    <input type="text" id="proxyUrlInput" placeholder="https://your-proxy.workers.dev" />
-                    <span class="setting-hint">Optional — only needed if direct API calls are blocked by CORS. <a href="#" id="showProxyHelp">See setup guide</a></span>
-                </div>
-                <div class="setting-group">
                     <label>Default Model</label>
                     <select id="defaultModelSelect">
                         <option value="claude-sonnet-4-6">Claude Sonnet 4.6 (Recommended)</option>
@@ -40,35 +35,6 @@
                     </select>
                 </div>
                 <button class="btn btn-primary btn-save-settings" id="saveSettings">Save Settings</button>
-            </div>
-            <!-- Proxy Setup Guide (hidden by default) -->
-            <div class="proxy-guide hidden" id="proxyGuide">
-                <h3>Cloudflare Worker Proxy Setup</h3>
-                <p>Deploy this as a Cloudflare Worker to proxy API calls:</p>
-                <pre class="code-block"><code>export default {
-  async fetch(request) {
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "Content-Type, x-api-key, anthropic-version",
-        },
-      });
-    }
-    const url = new URL(request.url);
-    const apiUrl = "https://api.anthropic.com" + url.pathname;
-    const resp = await fetch(apiUrl, {
-      method: request.method,
-      headers: request.headers,
-      body: request.body,
-    });
-    const newResp = new Response(resp.body, resp);
-    newResp.headers.set("Access-Control-Allow-Origin", "*");
-    return newResp;
-  },
-};</code></pre>
-                <button class="btn btn-secondary btn-sm" id="closeProxyGuide">Got it</button>
             </div>
         </div>
     </div>
@@ -97,6 +63,10 @@
             </div>
 
             <div class="sidebar-footer">
+                <button class="sidebar-btn" id="openSettingsBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    <span>Settings</span>
+                </button>
                 <div class="model-indicator" id="modelIndicator">
                     <span class="model-dot"></span>
                     <span id="currentModelLabel">Sonnet 4.6</span>
@@ -142,7 +112,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Admin: Press Ctrl+Shift+K to open settings -->
                 </div>
             </div>
 
@@ -201,20 +170,6 @@
     <!-- Toast -->
     <div class="toast" id="toast"><span id="toastMessage"></span></div>
 
-    <script src="app.js?v=2"></script>
-    <script>
-    // Admin access: click logo 5x or ?admin in URL
-    (function(){
-        var c=0,t;
-        document.querySelector('.logo').addEventListener('click',function(){
-            c++;clearTimeout(t);
-            if(c>=5){c=0;document.getElementById('settingsOverlay').classList.add('active');}
-            else{t=setTimeout(function(){c=0;},2000);}
-        });
-        if(location.search.indexOf('admin')>-1){
-            setTimeout(function(){document.getElementById('settingsOverlay').classList.add('active');},600);
-        }
-    })();
-    </script>
+    <script src="app.js?v=3"></script>
 </body>
 </html>
