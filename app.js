@@ -196,8 +196,6 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 const settingsOverlay = $('#settingsOverlay');
 const settingsClose = $('#settingsClose');
-const settingsBtn = $('#settingsBtn');
-const welcomeSettingsBtn = $('#welcomeSettingsBtn');
 const apiKeyInput = $('#apiKeyInput');
 const proxyUrlInput = $('#proxyUrlInput');
 const defaultModelSelect = $('#defaultModelSelect');
@@ -209,7 +207,6 @@ const closeProxyGuide = $('#closeProxyGuide');
 
 const skillList = $('#skillList');
 const welcomeScreen = $('#welcomeScreen');
-const welcomeSetup = $('#welcomeSetup');
 const skillWorkspace = $('#skillWorkspace');
 const wsSkillIcon = $('#wsSkillIcon');
 const wsSkillName = $('#wsSkillName');
@@ -241,13 +238,6 @@ function loadSettings() {
     defaultModelSelect.value = model;
     modelSelect.value = model;
     updateModelLabel(model);
-
-    // Show/hide setup alert
-    if (key) {
-        welcomeSetup.classList.add('hidden');
-    } else {
-        welcomeSetup.classList.remove('hidden');
-    }
 }
 
 function saveSettings() {
@@ -261,10 +251,6 @@ function saveSettings() {
 
     modelSelect.value = model;
     updateModelLabel(model);
-
-    if (key) {
-        welcomeSetup.classList.add('hidden');
-    }
 
     closeSettings();
     showToast('Settings saved');
@@ -289,9 +275,13 @@ function closeSettings() {
     proxyGuide.classList.add('hidden');
 }
 
-// Settings event listeners
-settingsBtn.addEventListener('click', openSettings);
-welcomeSettingsBtn.addEventListener('click', openSettings);
+// Settings event listeners — Admin only via Ctrl+Shift+K
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+        e.preventDefault();
+        openSettings();
+    }
+});
 settingsClose.addEventListener('click', closeSettings);
 settingsOverlay.addEventListener('click', (e) => {
     if (e.target === settingsOverlay) closeSettings();
@@ -444,8 +434,7 @@ async function sendMessage() {
 
     const apiKey = localStorage.getItem('anthropic_api_key');
     if (!apiKey) {
-        openSettings();
-        showToast('Please set your API key first');
+        showToast('Service not configured yet. Contact your admin.');
         return;
     }
 
