@@ -275,13 +275,25 @@ function closeSettings() {
     proxyGuide.classList.add('hidden');
 }
 
-// Settings event listeners — Admin only via Ctrl+Shift+K
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'K') {
-        e.preventDefault();
+// Settings event listeners — Admin only: click logo 5 times or add ?admin to URL
+let logoClickCount = 0;
+let logoClickTimer = null;
+document.querySelector('.logo').addEventListener('click', () => {
+    logoClickCount++;
+    clearTimeout(logoClickTimer);
+    if (logoClickCount >= 5) {
+        logoClickCount = 0;
         openSettings();
+    } else {
+        logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
     }
 });
+
+// Also allow ?admin in URL
+if (window.location.search.includes('admin')) {
+    setTimeout(openSettings, 500);
+}
+
 settingsClose.addEventListener('click', closeSettings);
 settingsOverlay.addEventListener('click', (e) => {
     if (e.target === settingsOverlay) closeSettings();
