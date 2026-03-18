@@ -294,6 +294,14 @@ if (window.location.search.includes('admin')) {
     setTimeout(openSettings, 500);
 }
 
+// Ctrl+Shift+K shortcut to open settings
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'K') {
+        e.preventDefault();
+        openSettings();
+    }
+});
+
 settingsClose.addEventListener('click', closeSettings);
 settingsOverlay.addEventListener('click', (e) => {
     if (e.target === settingsOverlay) closeSettings();

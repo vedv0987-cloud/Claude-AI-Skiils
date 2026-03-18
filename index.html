@@ -27,9 +27,9 @@
                     <span class="setting-hint">Your key is stored locally in your browser only. Never sent to any server except Anthropic.</span>
                 </div>
                 <div class="setting-group">
-                    <label>API Proxy URL <span class="optional-tag">Required for browser use</span></label>
+                    <label>API Proxy URL <span class="optional-tag" style="color:#888">Optional</span></label>
                     <input type="text" id="proxyUrlInput" placeholder="https://your-proxy.workers.dev" />
-                    <span class="setting-hint">Anthropic API doesn't support browser CORS. Use a Cloudflare Worker proxy. <a href="#" id="showProxyHelp">See setup guide</a></span>
+                    <span class="setting-hint">Optional — only needed if direct API calls are blocked by CORS. <a href="#" id="showProxyHelp">See setup guide</a></span>
                 </div>
                 <div class="setting-group">
                     <label>Default Model</label>
