@@ -1,804 +1,700 @@
-// ===== Skills Data =====
+// ===== Skills Configuration =====
 const skills = [
     {
-        id: 'commit',
-        name: 'Git Commit',
-        command: '/commit',
-        icon: '📦',
-        category: 'workflow',
-        color: '#22c55e',
-        description: 'Analyze staged changes and create well-structured git commits with clear, descriptive messages following repository conventions.',
-        usage: '/commit -m "Fix authentication bug"',
-        triggers: [
-            'When you want to commit changes with a well-crafted message',
-            'After completing a feature or bug fix',
-            'When you need git best practices applied automatically'
-        ],
-        examples: [
-            { input: '/commit', output: 'Analyzes all staged changes, drafts a concise commit message, and creates the commit' },
-            { input: '/commit -m "Add user auth"', output: 'Creates commit with the specified message after validating changes' }
-        ],
-        tags: ['git', 'version-control', 'automation']
+        id: 'creative-director',
+        name: 'Creative Director',
+        icon: '\uD83C\uDFAC',
+        description: 'Senior creative strategist — reviews briefs, provides creative direction, and feedback on campaigns',
+        systemPrompt: `You are an elite Creative Director with 20+ years of experience in advertising, branding, and digital marketing. You oversee all creative output and provide strategic direction.
+
+Your responsibilities:
+- Review creative briefs and provide detailed feedback
+- Suggest creative concepts, campaign ideas, and visual directions
+- Evaluate designs, copy, and overall brand consistency
+- Provide constructive critique with actionable improvements
+- Think about target audience, brand positioning, and market trends
+- Guide the creative team with clear, inspiring direction
+
+When given an image, analyze the composition, color palette, typography, messaging, and overall effectiveness. Always provide specific, actionable feedback.
+
+Respond in a structured format with sections like: Overall Assessment, Strengths, Areas for Improvement, Recommendations, and Next Steps.`,
+        placeholder: 'Describe your campaign brief, share a design for review, or ask for creative direction...',
+        supportsImages: true
     },
     {
-        id: 'simplify',
-        name: 'Code Simplifier',
-        command: '/simplify',
-        icon: '✨',
-        category: 'code',
-        color: '#7c5cfc',
-        description: 'Review changed code for reuse opportunities, quality improvements, and efficiency gains. Automatically fixes any issues found.',
-        usage: '/simplify',
-        triggers: [
-            'After writing new code that could be optimized',
-            'When you want to check for code reuse opportunities',
-            'To ensure code quality and efficiency'
-        ],
-        examples: [
-            { input: '/simplify', output: 'Reviews recent changes, identifies duplicated logic, and refactors for clarity' },
-            { input: '/simplify --file src/utils.ts', output: 'Focuses simplification on the specified file' }
-        ],
-        tags: ['refactoring', 'optimization', 'quality']
+        id: 'google-nano-banana-2',
+        name: 'Google Nano Banana 2',
+        icon: '\uD83C\uDF4C',
+        description: 'Generates optimized image prompts for Google Nano & Banana image generation models',
+        systemPrompt: `You are an expert prompt engineer specializing in Google's Nano and Banana image generation models. Your job is to create highly detailed, optimized prompts that produce stunning AI-generated images.
+
+Your expertise includes:
+- Crafting detailed scene descriptions with proper composition
+- Specifying lighting, camera angles, color palettes, and mood
+- Using model-specific keywords and tokens that improve output quality
+- Understanding negative prompts and quality boosters
+- Adapting style references (photorealistic, cinematic, illustration, etc.)
+- Handling aspect ratios, resolution hints, and technical parameters
+
+When the user provides a concept or reference image:
+1. Analyze the core idea or visual elements
+2. Generate 2-3 optimized prompt variations
+3. Include recommended negative prompts
+4. Suggest optimal settings (steps, CFG, sampler)
+
+Format each prompt clearly with labels. Use vivid, specific language. Include technical quality tokens like: masterpiece, best quality, ultra-detailed, 8k, professional photography, etc.`,
+        placeholder: 'Describe the image you want to generate, or upload a reference image...',
+        supportsImages: true
     },
     {
-        id: 'update-config',
-        name: 'Config Manager',
-        command: '/update-config',
-        icon: '⚙️',
-        category: 'workflow',
-        color: '#f59e0b',
-        description: 'Configure the Claude Code harness via settings.json. Set up hooks, permissions, environment variables, and automated behaviors.',
-        usage: '/update-config',
-        triggers: [
-            'When you need to configure automated behaviors ("from now on when X")',
-            'Setting up hooks for before/after events',
-            'Managing permissions and environment variables',
-            'Changes to settings.json or settings.local.json'
-        ],
-        examples: [
-            { input: '/update-config allow npm commands', output: 'Adds npm permission to settings' },
-            { input: '/update-config set DEBUG=true', output: 'Sets environment variable in config' }
-        ],
-        tags: ['settings', 'hooks', 'permissions', 'env']
+        id: 'freepik-cinema-studio',
+        name: 'Freepik Cinema Studio',
+        icon: '\uD83C\uDF9E\uFE0F',
+        description: 'Creates cinematic visual concepts and prompts for Freepik AI image generation',
+        systemPrompt: `You are a cinematic visual artist and prompt specialist for Freepik's AI image generation platform. You create stunning, commercial-grade visual concepts with a cinematic quality.
+
+Your specializations:
+- Cinematic composition and storytelling through visuals
+- Commercial photography and advertising aesthetics
+- Movie-poster and editorial-grade imagery
+- Dramatic lighting setups (Rembrandt, butterfly, rim lighting, golden hour)
+- Color grading and mood boards (teal & orange, desaturated, high-contrast)
+- Product photography with cinematic flair
+- Lifestyle and brand imagery
+
+When given a brief or reference image:
+1. Develop the cinematic concept with mood and atmosphere
+2. Write 2-3 detailed Freepik-optimized prompts
+3. Specify style direction: lighting, color grade, camera lens, depth of field
+4. Suggest variations (different angles, moods, or compositions)
+
+Output prompts formatted for direct use in Freepik AI. Focus on commercial viability and professional quality.`,
+        placeholder: 'Describe the cinematic visual you need, or upload a reference...',
+        supportsImages: true
     },
     {
-        id: 'claude-api',
-        name: 'Claude API Builder',
-        command: '/claude-api',
-        icon: '🔌',
-        category: 'code',
-        color: '#00d4ff',
-        description: 'Build applications with the Claude API or Anthropic SDK. Triggered when code uses anthropic imports or user requests API integration.',
-        usage: '/claude-api',
-        triggers: [
-            'When code imports anthropic or @anthropic-ai/sdk',
-            'Building apps with Claude API or Anthropic SDKs',
-            'Working with Agent SDK',
-            'API usage, tool use, and SDK patterns'
-        ],
-        examples: [
-            { input: '/claude-api create a chatbot', output: 'Generates a full chatbot app using the Anthropic SDK' },
-            { input: '/claude-api add tool use', output: 'Implements tool use pattern with the Claude API' }
-        ],
-        tags: ['api', 'sdk', 'integration', 'anthropic']
+        id: 'nano-banana-prompt-generator',
+        name: 'Nano Banana Prompt Generator',
+        icon: '\u2728',
+        description: 'Specialized prompt engineer for Nano Banana AI models — crafts perfect generation prompts',
+        systemPrompt: `You are a master prompt engineer exclusively focused on the Nano Banana AI image generation ecosystem. You understand every nuance of how these models interpret prompts.
+
+Core capabilities:
+- Deep knowledge of Nano Banana model architectures and their prompt sensitivities
+- Token weighting and emphasis techniques (parentheses, brackets, numerical weights)
+- Prompt structure optimization (subject > environment > style > quality > technical)
+- LoRA and model-specific trigger words
+- Batch prompt generation for A/B testing
+- Style transfer and composition control prompts
+- Inpainting and outpainting prompt strategies
+
+Your workflow:
+1. Understand the user's creative vision
+2. Generate primary prompt + 2 variations
+3. Provide negative prompt
+4. Recommend model settings (sampler, steps, CFG scale, seed)
+5. Suggest post-processing or upscaling tips
+
+Always format output as ready-to-paste prompts with clear sections.`,
+        placeholder: 'What image do you want to create? Describe style, subject, mood...',
+        supportsImages: true
     },
     {
-        id: 'loop',
-        name: 'Task Loop',
-        command: '/loop',
-        icon: '🔄',
-        category: 'workflow',
-        color: '#ff6b9d',
-        description: 'Run a prompt or slash command on a recurring interval. Perfect for monitoring, polling status, or running repeated tasks.',
-        usage: '/loop 5m /foo',
-        triggers: [
-            'When the user wants to set up a recurring task',
-            'Poll for status checks at intervals',
-            'Run something repeatedly (e.g., "check the deploy every 5 minutes")',
-            'Keep running a command on a schedule'
-        ],
-        examples: [
-            { input: '/loop 5m /commit', output: 'Runs /commit every 5 minutes' },
-            { input: '/loop 10m check deploy status', output: 'Checks deployment status every 10 minutes' }
-        ],
-        tags: ['automation', 'scheduling', 'monitoring']
+        id: 'higgsfield-cinema-studio',
+        name: 'Higgsfield Cinema Studio',
+        icon: '\uD83C\uDFA5',
+        description: 'Creates cinematic video concepts and prompts for Higgsfield AI video generation',
+        systemPrompt: `You are a cinematic video production specialist and prompt engineer for Higgsfield AI video generation. You create compelling motion content concepts.
+
+Your expertise covers:
+- Video prompt engineering for AI-generated motion content
+- Cinematic camera movements (dolly, crane, steadicam, drone shots)
+- Scene transitions and visual storytelling
+- Motion design and dynamic compositions
+- Character animation direction
+- Atmospheric and environmental motion (particles, weather, lighting shifts)
+- Music video, commercial, and social media video aesthetics
+
+When given a brief or reference:
+1. Develop the video concept with shot-by-shot breakdown
+2. Write optimized Higgsfield prompts with motion directives
+3. Specify camera movement, pacing, and transition style
+4. Include duration, aspect ratio, and framerate recommendations
+5. Suggest audio/music mood to complement the visuals
+
+Format as a clear shot list with individual prompts for each segment.`,
+        placeholder: 'Describe the video scene or motion concept you need...',
+        supportsImages: true
     },
     {
-        id: 'session-start-hook',
-        name: 'Session Start Hook',
-        command: '/session-start-hook',
-        icon: '🚀',
-        category: 'workflow',
-        color: '#8b5cf6',
-        description: 'Create and develop startup hooks for Claude Code on the web. Ensures your project can run tests and linters during web sessions.',
-        usage: '/session-start-hook',
-        triggers: [
-            'Setting up a repository for Claude Code on the web',
-            'Creating a SessionStart hook',
-            'Ensuring tests and linters run during web sessions'
-        ],
-        examples: [
-            { input: '/session-start-hook', output: 'Creates a startup hook that installs dependencies and sets up the dev environment' }
-        ],
-        tags: ['hooks', 'setup', 'web', 'ci']
+        id: 'pinterest-trend-intel',
+        name: 'Pinterest Trend Intel',
+        icon: '\uD83D\uDCCC',
+        description: 'Analyzes Pinterest trends and provides data-driven creative intelligence for content strategy',
+        systemPrompt: `You are a Pinterest trend analyst and creative intelligence specialist. You help brands and creators understand what's trending and how to capitalize on visual trends.
+
+Your capabilities:
+- Analyze visual trends across Pinterest categories
+- Identify emerging aesthetics, color trends, and design patterns
+- Provide seasonal and evergreen content strategy
+- Suggest Pin-optimized titles, descriptions, and keywords
+- Recommend board strategies and content calendars
+- Analyze reference images for trend alignment
+- Predict upcoming visual trends based on pattern analysis
+
+When given a topic, niche, or reference image:
+1. Identify current relevant Pinterest trends
+2. Provide trend analysis with audience insights
+3. Suggest 5-10 Pin content ideas with descriptions
+4. Recommend keywords and hashtags for discoverability
+5. Outline a content calendar framework
+6. Rate trend longevity (flash trend vs. sustained growth)
+
+Present data in structured, actionable format with clear sections.`,
+        placeholder: 'Enter a niche, topic, or upload a reference image for trend analysis...',
+        supportsImages: true
     },
     {
-        id: 'explore',
-        name: 'Codebase Explorer',
-        command: 'Agent (Explore)',
-        icon: '🔍',
-        category: 'code',
-        color: '#06b6d4',
-        description: 'Fast agent specialized for exploring codebases. Find files by patterns, search code for keywords, or answer questions about architecture.',
-        usage: 'Automatic via Agent tool',
-        triggers: [
-            'Finding files by patterns (e.g., "src/components/**/*.tsx")',
-            'Searching code for keywords (e.g., "API endpoints")',
-            'Understanding codebase architecture',
-            'Deep research across multiple files'
-        ],
-        examples: [
-            { input: 'Find all API routes', output: 'Searches across the codebase for route definitions and API handlers' },
-            { input: 'How does auth work?', output: 'Explores auth-related files and explains the authentication flow' }
-        ],
-        tags: ['search', 'exploration', 'analysis']
-    },
-    {
-        id: 'plan',
-        name: 'Architecture Planner',
-        command: 'Agent (Plan)',
-        icon: '📐',
-        category: 'code',
-        color: '#f97316',
-        description: 'Software architect agent for designing implementation plans. Returns step-by-step plans, identifies critical files, and considers trade-offs.',
-        usage: 'Automatic via Agent tool',
-        triggers: [
-            'Planning implementation strategy for a feature',
-            'Designing architecture for new modules',
-            'Identifying critical files and dependencies',
-            'Evaluating architectural trade-offs'
-        ],
-        examples: [
-            { input: 'Plan a user auth system', output: 'Produces a step-by-step plan with file structure, dependencies, and security considerations' }
-        ],
-        tags: ['architecture', 'planning', 'design']
-    },
-    {
-        id: 'gamma',
-        name: 'Gamma Presentations',
-        command: 'MCP: Gamma',
-        icon: '🎨',
-        category: 'design',
-        color: '#ec4899',
-        description: 'Create AI-powered presentations, documents, webpages, and social posts using Gamma. Intelligent defaults for professional content.',
-        usage: 'Via MCP Gamma tools',
-        triggers: [
-            'Creating presentations or slide decks',
-            'Generating documents and webpages',
-            'Creating social media posts',
-            'Professional content generation'
-        ],
-        examples: [
-            { input: 'Create a product launch deck', output: 'Generates a polished presentation with Gamma\'s AI-powered design' }
-        ],
-        tags: ['presentations', 'design', 'content']
-    },
-    {
-        id: 'figma',
-        name: 'Figma Integration',
-        command: 'MCP: Figma',
-        icon: '🎯',
-        category: 'design',
-        color: '#a855f7',
-        description: 'Read designs from Figma, create FigJam diagrams, manage Code Connect mappings. Bridge the gap between design and code.',
-        usage: 'Via MCP Figma tools',
-        triggers: [
-            'User shares a Figma URL',
-            'Converting Figma designs to code',
-            'Creating FigJam diagrams',
-            'Managing Code Connect mappings'
-        ],
-        examples: [
-            { input: 'Convert this Figma design to React', output: 'Reads the Figma design and generates adapted React+Tailwind code' }
-        ],
-        tags: ['design', 'figma', 'code-connect', 'ui']
-    },
-    {
-        id: 'canva',
-        name: 'Canva Designer',
-        command: 'MCP: Canva',
-        icon: '🖌️',
-        category: 'design',
-        color: '#0ea5e9',
-        description: 'Generate designs, manage assets, export in multiple formats, collaborate with comments, and organize content in Canva folders.',
-        usage: 'Via MCP Canva tools',
-        triggers: [
-            'Creating or generating designs',
-            'Managing design assets and exports',
-            'Collaborating with design comments',
-            'Organizing content in folders'
-        ],
-        examples: [
-            { input: 'Generate a social media banner', output: 'Creates a professional banner design in Canva' }
-        ],
-        tags: ['design', 'canva', 'graphics', 'export']
-    },
-    {
-        id: 'data-tools',
-        name: 'Data & File Tools',
-        command: 'Read / Write / Glob / Grep',
-        icon: '📊',
-        category: 'data',
-        color: '#14b8a6',
-        description: 'Comprehensive file operations: read files, write/create files, search by pattern with Glob, search content with Grep. Core building blocks.',
-        usage: 'Automatic via dedicated tools',
-        triggers: [
-            'Reading or writing files',
-            'Searching for files by name patterns',
-            'Searching file contents with regex',
-            'Working with notebooks and PDFs'
-        ],
-        examples: [
-            { input: 'Find all TypeScript files', output: 'Uses Glob with **/*.ts pattern to locate all TypeScript files' },
-            { input: 'Search for TODO comments', output: 'Uses Grep to find TODO patterns across the codebase' }
-        ],
-        tags: ['files', 'search', 'read', 'write']
+        id: 'static-ai-designer',
+        name: 'Static AI Designer',
+        icon: '\uD83C\uDFA8',
+        description: 'Designs static graphics — social posts, banners, thumbnails, and UI elements with AI',
+        systemPrompt: `You are a senior graphic designer specializing in static digital assets. You create production-ready design concepts and detailed specifications for AI generation.
+
+Your design expertise:
+- Social media graphics (Instagram, Facebook, LinkedIn, X/Twitter)
+- YouTube thumbnails and channel art
+- Web banners, hero images, and landing page visuals
+- Infographics and data visualization layouts
+- Business cards, flyers, and print-ready assets
+- UI elements, icons, and app graphics
+- Brand identity elements and style guides
+
+When given a brief or reference:
+1. Analyze the requirements and target platform specifications
+2. Provide detailed design concept with layout description
+3. Specify exact dimensions, color codes (HEX), and typography
+4. Generate AI prompts to create the visual elements
+5. Suggest design variations (A/B options)
+6. Include accessibility considerations (contrast ratios, readability)
+
+Output structured design briefs with technical specifications that can be directly used for production.`,
+        placeholder: 'Describe the static design you need — type, dimensions, brand colors, style...',
+        supportsImages: true
     }
 ];
 
-// ===== Category Colors & Labels =====
-const categoryConfig = {
-    code: { label: 'Code', bg: 'rgba(124, 92, 252, 0.15)', color: '#7c5cfc' },
-    design: { label: 'Design', bg: 'rgba(236, 72, 153, 0.15)', color: '#ec4899' },
-    workflow: { label: 'Workflow', bg: 'rgba(34, 197, 94, 0.15)', color: '#22c55e' },
-    data: { label: 'Data', bg: 'rgba(20, 184, 166, 0.15)', color: '#14b8a6' },
-    docs: { label: 'Docs', bg: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }
-};
+// ===== State =====
+let currentSkillId = null;
+let conversations = {}; // skillId -> [{role, content}]
+let pendingImage = null; // {base64, mediaType}
+let isGenerating = false;
 
 // ===== DOM Elements =====
-const navbar = document.getElementById('navbar');
-const themeToggle = document.getElementById('themeToggle');
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-const skillsGrid = document.getElementById('skillsGrid');
-const skillSearch = document.getElementById('skillSearch');
-const filterBtns = document.querySelectorAll('.filter-btn');
-const playgroundSkillList = document.getElementById('playgroundSkillList');
-const skillCommand = document.getElementById('skillCommand');
-const skillParams = document.getElementById('skillParams');
-const skillContext = document.getElementById('skillContext');
-const runSkillBtn = document.getElementById('runSkill');
-const inputPanel = document.getElementById('inputPanel');
-const outputPanel = document.getElementById('outputPanel');
-const outputContent = document.getElementById('outputContent');
-const outputTab = document.getElementById('outputTab');
-const skillModal = document.getElementById('skillModal');
-const modalClose = document.getElementById('modalClose');
-const toast = document.getElementById('toast');
-const toastMessage = document.getElementById('toastMessage');
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-// ===== Theme Toggle =====
-function initTheme() {
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
+const settingsOverlay = $('#settingsOverlay');
+const settingsClose = $('#settingsClose');
+const settingsBtn = $('#settingsBtn');
+const welcomeSettingsBtn = $('#welcomeSettingsBtn');
+const apiKeyInput = $('#apiKeyInput');
+const proxyUrlInput = $('#proxyUrlInput');
+const defaultModelSelect = $('#defaultModelSelect');
+const saveSettingsBtn = $('#saveSettings');
+const toggleKeyVis = $('#toggleKeyVis');
+const showProxyHelp = $('#showProxyHelp');
+const proxyGuide = $('#proxyGuide');
+const closeProxyGuide = $('#closeProxyGuide');
+
+const skillList = $('#skillList');
+const welcomeScreen = $('#welcomeScreen');
+const welcomeSetup = $('#welcomeSetup');
+const skillWorkspace = $('#skillWorkspace');
+const wsSkillIcon = $('#wsSkillIcon');
+const wsSkillName = $('#wsSkillName');
+const wsSkillDesc = $('#wsSkillDesc');
+const modelSelect = $('#modelSelect');
+const clearChatBtn = $('#clearChat');
+const chatMessages = $('#chatMessages');
+const chatArea = $('#chatArea');
+const userInput = $('#userInput');
+const sendBtn = $('#sendBtn');
+const imageInput = $('#imageInput');
+const imagePreview = $('#imagePreview');
+const previewImg = $('#previewImg');
+const removeImageBtn = $('#removeImage');
+const mobileToggle = $('#mobileToggle');
+const sidebar = $('#sidebar');
+const toast = $('#toast');
+const toastMessage = $('#toastMessage');
+const currentModelLabel = $('#currentModelLabel');
+
+// ===== Settings Management =====
+function loadSettings() {
+    const key = localStorage.getItem('anthropic_api_key') || '';
+    const proxy = localStorage.getItem('proxy_url') || '';
+    const model = localStorage.getItem('default_model') || 'claude-sonnet-4-6';
+
+    apiKeyInput.value = key;
+    proxyUrlInput.value = proxy;
+    defaultModelSelect.value = model;
+    modelSelect.value = model;
+    updateModelLabel(model);
+
+    // Show/hide setup alert
+    if (key) {
+        welcomeSetup.classList.add('hidden');
+    } else {
+        welcomeSetup.classList.remove('hidden');
+    }
 }
 
-themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-});
+function saveSettings() {
+    const key = apiKeyInput.value.trim();
+    const proxy = proxyUrlInput.value.trim();
+    const model = defaultModelSelect.value;
 
-initTheme();
+    localStorage.setItem('anthropic_api_key', key);
+    localStorage.setItem('proxy_url', proxy);
+    localStorage.setItem('default_model', model);
 
-// ===== Navbar Scroll =====
-window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-});
+    modelSelect.value = model;
+    updateModelLabel(model);
 
-// ===== Active Nav Link =====
-const sections = document.querySelectorAll('section[id], .hero[id]');
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const top = section.offsetTop - 100;
-        if (window.scrollY >= top) {
-            current = section.getAttribute('id');
-        }
-    });
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
-    });
-});
-
-// ===== Hamburger Menu =====
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-});
-
-navLinks.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
-    });
-});
-
-// ===== Render Skills Grid =====
-function renderSkills(filter = 'all', search = '') {
-    const filtered = skills.filter(s => {
-        const matchFilter = filter === 'all' || s.category === filter;
-        const matchSearch = search === '' ||
-            s.name.toLowerCase().includes(search) ||
-            s.description.toLowerCase().includes(search) ||
-            s.tags.some(t => t.includes(search));
-        return matchFilter && matchSearch;
-    });
-
-    skillsGrid.innerHTML = filtered.map((skill, i) => {
-        const cat = categoryConfig[skill.category] || categoryConfig.code;
-        return `
-            <div class="skill-card" data-skill="${skill.id}" style="animation-delay: ${i * 0.05}s">
-                <div class="skill-card-header">
-                    <div class="skill-icon" style="background: ${cat.bg}">${skill.icon}</div>
-                    <span class="skill-category-badge" style="background: ${cat.bg}; color: ${cat.color}">${cat.label}</span>
-                </div>
-                <h3>${skill.name}</h3>
-                <p>${skill.description}</p>
-                <div class="skill-command">${skill.command}</div>
-                <div class="skill-tags">
-                    ${skill.tags.map(t => `<span class="skill-tag">${t}</span>`).join('')}
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    if (filtered.length === 0) {
-        skillsGrid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-muted);">
-                <p style="font-size: 1.2rem; margin-bottom: 8px;">No skills found</p>
-                <p>Try a different filter or search term</p>
-            </div>
-        `;
+    if (key) {
+        welcomeSetup.classList.add('hidden');
     }
 
-    // Attach click handlers
-    document.querySelectorAll('.skill-card').forEach(card => {
-        card.addEventListener('click', () => openModal(card.dataset.skill));
-    });
+    closeSettings();
+    showToast('Settings saved');
 }
 
-// ===== Skills Filter =====
-let activeFilter = 'all';
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeFilter = btn.dataset.filter;
-        renderSkills(activeFilter, skillSearch.value.toLowerCase());
-    });
+function updateModelLabel(model) {
+    const labels = {
+        'claude-sonnet-4-6': 'Sonnet 4.6',
+        'claude-haiku-4-5-20251001': 'Haiku 4.5',
+        'claude-opus-4-6': 'Opus 4.6'
+    };
+    currentModelLabel.textContent = labels[model] || model;
+}
+
+function openSettings() {
+    loadSettings();
+    settingsOverlay.classList.add('active');
+}
+
+function closeSettings() {
+    settingsOverlay.classList.remove('active');
+    proxyGuide.classList.add('hidden');
+}
+
+// Settings event listeners
+settingsBtn.addEventListener('click', openSettings);
+welcomeSettingsBtn.addEventListener('click', openSettings);
+settingsClose.addEventListener('click', closeSettings);
+settingsOverlay.addEventListener('click', (e) => {
+    if (e.target === settingsOverlay) closeSettings();
+});
+saveSettingsBtn.addEventListener('click', saveSettings);
+
+toggleKeyVis.addEventListener('click', () => {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleKeyVis.textContent = isPassword ? 'Hide' : 'Show';
 });
 
-// ===== Skills Search =====
-skillSearch.addEventListener('input', (e) => {
-    renderSkills(activeFilter, e.target.value.toLowerCase());
+showProxyHelp.addEventListener('click', (e) => {
+    e.preventDefault();
+    proxyGuide.classList.toggle('hidden');
 });
 
-// ===== Skill Modal =====
-function openModal(skillId) {
-    const skill = skills.find(s => s.id === skillId);
-    if (!skill) return;
+closeProxyGuide.addEventListener('click', () => {
+    proxyGuide.classList.add('hidden');
+});
 
-    const cat = categoryConfig[skill.category] || categoryConfig.code;
-
-    document.getElementById('modalIcon').innerHTML = skill.icon;
-    document.getElementById('modalIcon').style.background = cat.bg;
-    document.getElementById('modalTitle').textContent = skill.name;
-    document.getElementById('modalCategory').textContent = cat.label;
-    document.getElementById('modalDescription').textContent = skill.description;
-    document.getElementById('modalUsage').innerHTML = `<code>${skill.usage}</code>`;
-
-    const triggersList = document.getElementById('modalTriggers');
-    triggersList.innerHTML = skill.triggers.map(t => `<li>${t}</li>`).join('');
-
-    const examplesDiv = document.getElementById('modalExamples');
-    examplesDiv.innerHTML = skill.examples.map(ex => `
-        <div style="margin-bottom: 12px;">
-            <div class="code-block" style="margin-bottom: 6px;"><code style="color: #89b4fa;">$ ${ex.input}</code></div>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 8px;">${ex.output}</p>
+// ===== Render Skill List =====
+function renderSkillList() {
+    skillList.innerHTML = skills.map(s => `
+        <div class="skill-item" data-skill="${s.id}">
+            <span class="skill-item-icon">${s.icon}</span>
+            <span class="skill-item-name">${s.name}</span>
         </div>
     `).join('');
 
-    // Modal actions
-    document.getElementById('modalTryBtn').onclick = () => {
-        closeModal();
-        selectPlaygroundSkill(skillId);
-        document.getElementById('playground').scrollIntoView({ behavior: 'smooth' });
-    };
-
-    document.getElementById('modalCopyBtn').onclick = () => {
-        navigator.clipboard.writeText(skill.command).then(() => {
-            showToast(`Copied: ${skill.command}`);
-        });
-    };
-
-    skillModal.classList.add('active');
-}
-
-function closeModal() {
-    skillModal.classList.remove('active');
-}
-
-modalClose.addEventListener('click', closeModal);
-skillModal.addEventListener('click', (e) => {
-    if (e.target === skillModal) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-});
-
-// ===== Playground =====
-function renderPlaygroundList() {
-    playgroundSkillList.innerHTML = skills.map(s => `
-        <div class="playground-skill-item" data-skill="${s.id}">
-            <span class="item-icon">${s.icon}</span>
-            <span>${s.name}</span>
-        </div>
-    `).join('');
-
-    document.querySelectorAll('.playground-skill-item').forEach(item => {
-        item.addEventListener('click', () => selectPlaygroundSkill(item.dataset.skill));
+    $$('.skill-item').forEach(item => {
+        item.addEventListener('click', () => selectSkill(item.dataset.skill));
     });
 }
 
-function selectPlaygroundSkill(skillId) {
+// ===== Select Skill =====
+function selectSkill(skillId) {
     const skill = skills.find(s => s.id === skillId);
     if (!skill) return;
 
-    document.querySelectorAll('.playground-skill-item').forEach(item => {
+    currentSkillId = skillId;
+
+    // Update sidebar active state
+    $$('.skill-item').forEach(item => {
         item.classList.toggle('active', item.dataset.skill === skillId);
     });
 
-    skillCommand.value = skill.command;
-    skillParams.placeholder = `Parameters for ${skill.name}...`;
+    // Update workspace header
+    wsSkillIcon.textContent = skill.icon;
+    wsSkillName.textContent = skill.name;
+    wsSkillDesc.textContent = skill.description;
 
-    // Show input panel
-    inputPanel.classList.remove('hidden');
-    outputPanel.classList.add('hidden');
-    document.querySelectorAll('.editor-tab').forEach(tab => tab.classList.remove('active'));
-    document.querySelector('.editor-tab').classList.add('active');
+    // Update input placeholder
+    userInput.placeholder = skill.placeholder;
+
+    // Show workspace, hide welcome
+    welcomeScreen.classList.add('hidden');
+    skillWorkspace.classList.remove('hidden');
+
+    // Initialize conversation if needed
+    if (!conversations[skillId]) {
+        conversations[skillId] = [];
+    }
+
+    renderMessages();
+
+    // Close mobile sidebar
+    sidebar.classList.remove('open');
+
+    // Focus input
+    userInput.focus();
 }
 
-// Tab switching
-document.querySelectorAll('.editor-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+// ===== Render Messages =====
+function renderMessages() {
+    const msgs = conversations[currentSkillId] || [];
 
-        if (tab.id === 'outputTab') {
-            inputPanel.classList.add('hidden');
-            outputPanel.classList.remove('hidden');
-        } else {
-            inputPanel.classList.remove('hidden');
-            outputPanel.classList.add('hidden');
-        }
-    });
-});
+    if (msgs.length === 0) {
+        const skill = skills.find(s => s.id === currentSkillId);
+        chatMessages.innerHTML = `
+            <div class="chat-msg">
+                <div class="msg-avatar assistant">AI</div>
+                <div class="msg-body">
+                    <div class="msg-role">AI Skills Hub</div>
+                    <div class="msg-content">
+                        <p><strong>${skill.name}</strong> is ready. ${skill.description}.</p>
+                        <p>Type your brief below or upload an image to get started.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        chatMessages.innerHTML = msgs.map(msg => {
+            if (msg.role === 'user') {
+                return renderUserMessage(msg);
+            } else if (msg.role === 'assistant') {
+                return renderAssistantMessage(msg);
+            }
+            return '';
+        }).join('');
+    }
 
-// Run Skill (simulation)
-runSkillBtn.addEventListener('click', () => {
-    const command = skillCommand.value;
-    const params = skillParams.value;
-    const context = skillContext.value;
+    scrollToBottom();
+}
 
-    if (!command) {
-        showToast('Please select a skill first');
+function renderUserMessage(msg) {
+    let imageHtml = '';
+    if (msg.image) {
+        imageHtml = `<img class="msg-image" src="data:${msg.image.mediaType};base64,${msg.image.base64}" alt="Uploaded image" />`;
+    }
+
+    return `
+        <div class="chat-msg">
+            <div class="msg-avatar user">You</div>
+            <div class="msg-body">
+                <div class="msg-role">You</div>
+                <div class="msg-content">
+                    ${imageHtml}
+                    <p>${escapeHtml(msg.text)}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderAssistantMessage(msg) {
+    const contentHtml = msg.loading
+        ? `<div class="msg-loading"><span></span><span></span><span></span></div>`
+        : msg.error
+            ? `<div class="msg-error">${escapeHtml(msg.error)}</div>`
+            : `<div class="msg-content">${markdownToHtml(msg.text)}</div>`;
+
+    return `
+        <div class="chat-msg">
+            <div class="msg-avatar assistant">AI</div>
+            <div class="msg-body">
+                <div class="msg-role">${skills.find(s => s.id === currentSkillId)?.name || 'Assistant'}</div>
+                ${contentHtml}
+            </div>
+        </div>
+    `;
+}
+
+// ===== Send Message =====
+async function sendMessage() {
+    if (isGenerating) return;
+
+    const text = userInput.value.trim();
+    if (!text && !pendingImage) return;
+
+    const apiKey = localStorage.getItem('anthropic_api_key');
+    if (!apiKey) {
+        openSettings();
+        showToast('Please set your API key first');
         return;
     }
 
-    // Switch to output
-    outputPanel.classList.remove('hidden');
-    inputPanel.classList.add('hidden');
-    document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
-    outputTab.classList.add('active');
+    const skill = skills.find(s => s.id === currentSkillId);
+    if (!skill) return;
 
-    // Simulate output
-    const skill = skills.find(s => s.command === command);
-    const skillName = skill ? skill.name : command;
+    // Add user message
+    const userMsg = { role: 'user', text: text || '(image uploaded)', image: pendingImage };
+    conversations[currentSkillId].push(userMsg);
 
-    outputContent.innerHTML = '';
-    const lines = [
-        `<span style="color: #a6e3a1;">►</span> Running: <span style="color: #89b4fa;">${command}</span>`,
-        params ? `<span style="color: #6c7086;">  params:</span> ${params}` : '',
-        context ? `<span style="color: #6c7086;">  context:</span> ${context}` : '',
-        '',
-        `<span style="color: #f9e2af;">⟳</span> Initializing ${skillName}...`,
-        `<span style="color: #a6e3a1;">✓</span> Skill loaded successfully`,
-        `<span style="color: #a6e3a1;">✓</span> Parameters validated`,
-        `<span style="color: #89b4fa;">⟳</span> Processing with Claude Opus 4.6...`,
-        '',
-        `<span style="color: #a6e3a1;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`,
-        `<span style="color: #cba6f7;">Result:</span>`,
-        `  Skill <span style="color: #89b4fa;">${skillName}</span> executed successfully.`,
-        `  Duration: <span style="color: #f9e2af;">${(Math.random() * 2 + 0.5).toFixed(1)}s</span>`,
-        `  Status: <span style="color: #a6e3a1;">Complete ✓</span>`,
-        `<span style="color: #a6e3a1;">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>`,
-    ].filter(Boolean);
+    // Clear input
+    userInput.value = '';
+    userInput.style.height = 'auto';
+    clearImage();
 
-    let i = 0;
-    const typeInterval = setInterval(() => {
-        if (i < lines.length) {
-            outputContent.innerHTML += lines[i] + '\n';
-            outputContent.scrollTop = outputContent.scrollHeight;
-            i++;
-        } else {
-            clearInterval(typeInterval);
+    // Add loading assistant message
+    conversations[currentSkillId].push({ role: 'assistant', loading: true });
+    renderMessages();
+
+    isGenerating = true;
+    sendBtn.disabled = true;
+
+    try {
+        const model = modelSelect.value;
+        const response = await callClaudeAPI(apiKey, model, skill, conversations[currentSkillId].slice(0, -1));
+
+        // Replace loading with response
+        const lastIdx = conversations[currentSkillId].length - 1;
+        conversations[currentSkillId][lastIdx] = { role: 'assistant', text: response };
+    } catch (err) {
+        const lastIdx = conversations[currentSkillId].length - 1;
+        conversations[currentSkillId][lastIdx] = { role: 'assistant', error: err.message };
+    }
+
+    isGenerating = false;
+    sendBtn.disabled = false;
+    renderMessages();
+}
+
+// ===== Claude API Call =====
+async function callClaudeAPI(apiKey, model, skill, messages) {
+    const proxyUrl = localStorage.getItem('proxy_url') || '';
+    const baseUrl = proxyUrl ? proxyUrl.replace(/\/+$/, '') : 'https://api.anthropic.com';
+    const url = `${baseUrl}/v1/messages`;
+
+    // Build message content array from conversation
+    const apiMessages = [];
+
+    for (const msg of messages) {
+        if (msg.role === 'user') {
+            const content = [];
+
+            if (msg.image) {
+                content.push({
+                    type: 'image',
+                    source: {
+                        type: 'base64',
+                        media_type: msg.image.mediaType,
+                        data: msg.image.base64
+                    }
+                });
+            }
+
+            if (msg.text) {
+                content.push({ type: 'text', text: msg.text });
+            }
+
+            apiMessages.push({ role: 'user', content });
+        } else if (msg.role === 'assistant' && msg.text) {
+            apiMessages.push({ role: 'assistant', content: msg.text });
         }
-    }, 150);
+    }
+
+    const body = {
+        model: model,
+        max_tokens: 4096,
+        system: skill.systemPrompt,
+        messages: apiMessages
+    };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = errorData.error?.message || `API error: ${response.status}`;
+
+        if (response.status === 0 || errorMsg.includes('CORS') || errorMsg.includes('fetch')) {
+            throw new Error('CORS error: Set up a proxy URL in Settings. The Anthropic API requires a CORS proxy for browser access.');
+        }
+
+        throw new Error(errorMsg);
+    }
+
+    const data = await response.json();
+    const textBlock = data.content?.find(c => c.type === 'text');
+    return textBlock?.text || 'No response generated.';
+}
+
+// ===== Image Upload =====
+imageInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 20 * 1024 * 1024) {
+        showToast('Image must be under 20MB');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        const base64Full = reader.result;
+        const mediaType = file.type;
+        const base64 = base64Full.split(',')[1];
+
+        pendingImage = { base64, mediaType };
+        previewImg.src = base64Full;
+        imagePreview.classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+    imageInput.value = '';
 });
 
-// ===== Toast =====
+removeImageBtn.addEventListener('click', clearImage);
+
+function clearImage() {
+    pendingImage = null;
+    imagePreview.classList.add('hidden');
+    previewImg.src = '';
+}
+
+// ===== Input Handling =====
+userInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+userInput.addEventListener('input', () => {
+    userInput.style.height = 'auto';
+    userInput.style.height = Math.min(userInput.scrollHeight, 150) + 'px';
+});
+
+sendBtn.addEventListener('click', sendMessage);
+
+clearChatBtn.addEventListener('click', () => {
+    if (currentSkillId) {
+        conversations[currentSkillId] = [];
+        renderMessages();
+    }
+});
+
+// ===== Model Select =====
+modelSelect.addEventListener('change', () => {
+    updateModelLabel(modelSelect.value);
+});
+
+// ===== Mobile Sidebar =====
+mobileToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+});
+
+// Close sidebar when clicking outside on mobile
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 &&
+        sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) &&
+        e.target !== mobileToggle) {
+        sidebar.classList.remove('open');
+    }
+});
+
+// ===== Utilities =====
+function scrollToBottom() {
+    requestAnimationFrame(() => {
+        chatArea.scrollTop = chatArea.scrollHeight;
+    });
+}
+
 function showToast(message) {
     toastMessage.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ===== Counter Animation =====
-function animateCounters() {
-    document.querySelectorAll('.stat-number[data-count]').forEach(el => {
-        const target = parseInt(el.dataset.count);
-        let current = 0;
-        const increment = target / 40;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                el.textContent = target;
-                clearInterval(timer);
-            } else {
-                el.textContent = Math.floor(current);
-            }
-        }, 40);
-    });
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
-// ===== Terminal Typing Animation =====
-function typeTerminal() {
-    const commands = [
-        { cmd: '/commit', delay: 80 },
-        { cmd: '/simplify', delay: 80 },
-        { cmd: '/claude-api', delay: 80 },
-        { cmd: '/loop 5m /commit', delay: 80 },
-        { cmd: '/update-config', delay: 80 },
-    ];
+// Simple markdown to HTML converter
+function markdownToHtml(md) {
+    if (!md) return '';
 
-    const terminalBody = document.getElementById('terminalBody');
-    const typing = document.getElementById('terminalTyping');
-    let cmdIndex = 0;
+    let html = escapeHtml(md);
 
-    function typeCommand() {
-        if (cmdIndex >= commands.length) cmdIndex = 0;
-        const { cmd, delay } = commands[cmdIndex];
-        let charIndex = 0;
-        typing.textContent = '';
+    // Code blocks (```)
+    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+        return `<pre><code>${code.trim()}</code></pre>`;
+    });
 
-        const typeChar = setInterval(() => {
-            if (charIndex < cmd.length) {
-                typing.textContent += cmd[charIndex];
-                charIndex++;
-            } else {
-                clearInterval(typeChar);
-                setTimeout(() => {
-                    // Add output
-                    const outputDiv = document.createElement('div');
-                    outputDiv.className = 'terminal-output';
-                    outputDiv.innerHTML = getTerminalOutput(cmd);
-                    terminalBody.appendChild(outputDiv);
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-                    // New line
-                    setTimeout(() => {
-                        const newLine = document.createElement('div');
-                        newLine.className = 'terminal-line';
-                        newLine.innerHTML = '<span class="prompt">$</span><span class="typing" id="terminalTyping"></span><span class="cursor">|</span>';
-                        terminalBody.appendChild(newLine);
+    // Bold
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-                        // Keep terminal from getting too long
-                        while (terminalBody.children.length > 12) {
-                            terminalBody.removeChild(terminalBody.firstChild);
-                        }
+    // Italic
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-                        cmdIndex++;
-                        // Update typing reference
-                        const newTyping = terminalBody.querySelector('#terminalTyping:last-of-type') ||
-                                         terminalBody.querySelector('.terminal-line:last-child .typing');
-                        if (newTyping) {
-                            typing.removeAttribute('id');
-                            newTyping.id = 'terminalTyping';
-                        }
-                        setTimeout(typeCommand, 1000);
-                    }, 800);
-                }, 500);
-            }
-        }, delay);
+    // Headers
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+    // Blockquotes
+    html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+    // Unordered lists
+    html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+
+    // Ordered lists
+    html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+
+    // Line breaks -> paragraphs
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = html.replace(/\n/g, '<br>');
+
+    // Wrap in paragraph if not already wrapped
+    if (!html.startsWith('<')) {
+        html = '<p>' + html + '</p>';
     }
 
-    setTimeout(typeCommand, 1500);
-}
-
-function getTerminalOutput(cmd) {
-    const outputs = {
-        '/commit': '<span class="success">✓</span> Committed: <span class="info">fix: resolve auth token refresh</span>',
-        '/simplify': '<span class="success">✓</span> Simplified <span class="info">3 files</span> — removed <span class="warn">47 lines</span> of duplicate code',
-        '/claude-api': '<span class="success">✓</span> Generated <span class="accent">Claude API</span> integration with <span class="info">tool use</span>',
-        '/loop 5m /commit': '<span class="success">✓</span> Loop started: <span class="info">/commit</span> every <span class="warn">5m</span>',
-        '/update-config': '<span class="success">✓</span> Updated <span class="info">settings.json</span> — added <span class="accent">npm</span> permission',
-    };
-    return outputs[cmd] || '<span class="success">✓</span> Done';
-}
-
-// ===== Workflow Scroll Animation =====
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.workflow-step').forEach(el => observer.observe(el));
-}
-
-// ===== Team Dashboard =====
-function renderPopularSkills() {
-    const popular = [
-        { icon: '📦', name: 'Git Commit', pct: 92 },
-        { icon: '✨', name: 'Code Simplifier', pct: 78 },
-        { icon: '🔌', name: 'Claude API Builder', pct: 65 },
-        { icon: '🔍', name: 'Codebase Explorer', pct: 58 },
-        { icon: '⚙️', name: 'Config Manager', pct: 45 },
-    ];
-
-    document.getElementById('popularSkills').innerHTML = popular.map(s => `
-        <div class="pop-skill">
-            <div class="pop-skill-info">
-                <span class="pop-skill-icon">${s.icon}</span>
-                <span class="pop-skill-name">${s.name}</span>
-            </div>
-            <div class="pop-skill-bar">
-                <div class="pop-skill-fill" style="width: ${s.pct}%"></div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderActivityFeed() {
-    const activities = [
-        { avatar: 'AJ', name: 'Alex J.', action: 'ran <strong>/commit</strong>', time: '2m ago' },
-        { avatar: 'SK', name: 'Sarah K.', action: 'used <strong>Figma Integration</strong>', time: '8m ago' },
-        { avatar: 'MR', name: 'Mike R.', action: 'ran <strong>/simplify</strong> on utils.ts', time: '15m ago' },
-        { avatar: 'LP', name: 'Lisa P.', action: 'created <strong>Gamma presentation</strong>', time: '32m ago' },
-        { avatar: 'DC', name: 'Dave C.', action: 'configured <strong>/update-config</strong>', time: '1h ago' },
-    ];
-
-    document.getElementById('activityFeed').innerHTML = activities.map(a => `
-        <div class="activity-item">
-            <div class="activity-avatar">${a.avatar}</div>
-            <div>
-                <div class="activity-text"><strong>${a.name}</strong> ${a.action}</div>
-                <div class="activity-time">${a.time}</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// ===== Simple Chart (no dependencies) =====
-function renderUsageChart() {
-    const canvas = document.getElementById('usageChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas size
-    const container = canvas.parentElement;
-    canvas.width = container.offsetWidth * 2;
-    canvas.height = container.offsetHeight * 2;
-    ctx.scale(2, 2);
-
-    const w = container.offsetWidth;
-    const h = container.offsetHeight;
-    const data = [12, 19, 8, 25, 18, 30, 22, 35, 28, 40, 33, 45];
-    const labels = ['6a', '7a', '8a', '9a', '10a', '11a', '12p', '1p', '2p', '3p', '4p', '5p'];
-    const max = Math.max(...data);
-    const padding = { top: 20, right: 20, bottom: 30, left: 40 };
-    const chartW = w - padding.left - padding.right;
-    const chartH = h - padding.top - padding.bottom;
-
-    // Grid lines
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-        const y = padding.top + (chartH / 4) * i;
-        ctx.beginPath();
-        ctx.moveTo(padding.left, y);
-        ctx.lineTo(w - padding.right, y);
-        ctx.stroke();
-    }
-
-    // Draw gradient area
-    const gradient = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
-    gradient.addColorStop(0, 'rgba(124, 92, 252, 0.3)');
-    gradient.addColorStop(1, 'rgba(124, 92, 252, 0)');
-
-    ctx.beginPath();
-    data.forEach((val, i) => {
-        const x = padding.left + (chartW / (data.length - 1)) * i;
-        const y = padding.top + chartH - (val / max) * chartH;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-    });
-    ctx.lineTo(padding.left + chartW, padding.top + chartH);
-    ctx.lineTo(padding.left, padding.top + chartH);
-    ctx.closePath();
-    ctx.fillStyle = gradient;
-    ctx.fill();
-
-    // Draw line
-    const lineGradient = ctx.createLinearGradient(padding.left, 0, w - padding.right, 0);
-    lineGradient.addColorStop(0, '#7c5cfc');
-    lineGradient.addColorStop(1, '#00d4ff');
-
-    ctx.beginPath();
-    data.forEach((val, i) => {
-        const x = padding.left + (chartW / (data.length - 1)) * i;
-        const y = padding.top + chartH - (val / max) * chartH;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-    });
-    ctx.strokeStyle = lineGradient;
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-
-    // Draw dots
-    data.forEach((val, i) => {
-        const x = padding.left + (chartW / (data.length - 1)) * i;
-        const y = padding.top + chartH - (val / max) * chartH;
-        ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#7c5cfc';
-        ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-    });
-
-    // Labels
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#6b6b80';
-    ctx.font = '10px Inter, sans-serif';
-    ctx.textAlign = 'center';
-    labels.forEach((label, i) => {
-        const x = padding.left + (chartW / (data.length - 1)) * i;
-        ctx.fillText(label, x, h - 8);
-    });
+    return html;
 }
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    renderSkills();
-    renderPlaygroundList();
-    renderPopularSkills();
-    renderActivityFeed();
-    initScrollAnimations();
-    typeTerminal();
-    animateCounters();
-
-    // Delay chart render to ensure container is sized
-    setTimeout(renderUsageChart, 100);
-
-    // Re-render chart on resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(renderUsageChart, 200);
-    });
+    renderSkillList();
+    loadSettings();
 });
