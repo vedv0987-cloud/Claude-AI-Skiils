@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
     <!-- Settings Modal -->
@@ -201,6 +201,20 @@
     <!-- Toast -->
     <div class="toast" id="toast"><span id="toastMessage"></span></div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2"></script>
+    <script>
+    // Admin access: click logo 5x or ?admin in URL
+    (function(){
+        var c=0,t;
+        document.querySelector('.logo').addEventListener('click',function(){
+            c++;clearTimeout(t);
+            if(c>=5){c=0;document.getElementById('settingsOverlay').classList.add('active');}
+            else{t=setTimeout(function(){c=0;},2000);}
+        });
+        if(location.search.indexOf('admin')>-1){
+            setTimeout(function(){document.getElementById('settingsOverlay').classList.add('active');},600);
+        }
+    })();
+    </script>
 </body>
 </html>
