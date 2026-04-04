@@ -170,6 +170,13 @@ const currentModelLabel = $('#currentModelLabel');
 const openSettingsBtn = $('#openSettingsBtn');
 
 // ===== Image Compression =====
+function getBase64ByteSize(b64) {
+    let padding = 0;
+    if (b64.endsWith('==')) padding = 2;
+    else if (b64.endsWith('=')) padding = 1;
+    return (b64.length * 0.75) - padding;
+}
+
 function compressImage(file) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -182,7 +189,7 @@ function compressImage(file) {
             const reader = new FileReader();
             reader.onload = () => {
                 const originalBase64 = reader.result.split(',')[1];
-                const originalBytes = atob(originalBase64).length;
+                const originalBytes = getBase64ByteSize(originalBase64);
 
                 if (originalBytes <= MAX_IMAGE_BYTES && IMAGE_TYPES.includes(file.type)) {
                     resolve({
@@ -218,7 +225,7 @@ function compressImage(file) {
                 for (let quality = 0.85; quality >= 0.1; quality -= 0.1) {
                     const result = canvas.toDataURL('image/jpeg', quality);
                     const b64 = result.split(',')[1];
-                    const bytes = atob(b64).length;
+                    const bytes = getBase64ByteSize(b64);
                     if (bytes <= MAX_IMAGE_BYTES) {
                         resolve({
                             base64: b64,
@@ -244,7 +251,7 @@ function compressImage(file) {
                     fileName: file.name,
                     fileType: 'image',
                     previewUrl: result,
-                    size: atob(b64).length
+                    size: getBase64ByteSize(b64)
                 });
             };
             reader.readAsDataURL(file);
@@ -321,7 +328,7 @@ async function processFile(file) {
         mediaType,
         fileName: file.name,
         fileType: isPdfFile(file) ? 'document' : 'document',
-        size: atob(base64).length,
+        size: getBase64ByteSize(base64),
         ext: ext
     };
 }
